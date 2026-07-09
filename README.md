@@ -1,5 +1,7 @@
 # 🌍 Emy's World
 
+![Emy's World Preview](preview.png)
+
 ![Portfolio](https://img.shields.io/badge/Status-Live-success)
 
 My personal developer portfolio built from scratch using HTML, CSS, and JavaScript.
