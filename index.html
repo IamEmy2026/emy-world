@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Emy's World</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <canvas id="particles"></canvas>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#artists">Artists</a>
+    <a href="#albums">Albums</a>
+    <a href="#contact">Contact</a>
+
+    <button id="themeButton" onclick="changeTheme()">
+        🌞 Light Mode
+    </button>
+
+</nav>
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <img src="images/profile.jpg"
+         alt="Profile Picture"
+         class="profile-pic">
+
+    <h1 id="title"></h1>
+
+    <h2>
+        Future Web Developer &
+        Cybersecurity Enthusiast 💻
+    </h2>
+
+    <p>
+
+        Building websites,
+
+        learning cybersecurity,
+
+        creating interactive projects,
+
+        and documenting the journey.
+
+    </p>
+
+    <div class="hero-buttons">
+
+        <a href="#projects" class="hero-btn">
+
+            🚀 View Projects
+
+        </a>
+
+        <a href="#contact" class="hero-btn">
+
+            ✉ Contact Me
+
+        </a>
+
+    </div>
+
+</section>
+
+<section class="card">
+
+    <h2>📊 Developer Dashboard</h2>
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h1>3</h1>
+            <p>Projects Built</p>
+        </div>
+
+        <div class="stat-card">
+            <h1>6</h1>
+            <p>Technologies Learned</p>
+        </div>
+
+        <div class="stat-card">
+            <h1>250+</h1>
+            <p>Hours Coding</p>
+        </div>
+
+        <div class="stat-card">
+            <h1>∞</h1>
+            <p>Cups of Coffee</p>
+        </div>
+
+        <div class="stat-card">
+            <h1>JS</h1>
+            <p>Currently Learning</p>
+        </div>
+
+        <div class="stat-card">
+            <h1>2026</h1>
+            <p>Portfolio Started</p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="card" id="terminal">
+
+    <h2>💻 Developer Terminal</h2>
+
+    <div class="terminal">
+
+        <div class="terminal">
+
+    <div id="terminalOutput"></div>
+
+    <div class="terminal-input">
+
+        <span>emy@portfolio:~$</span>
+
+        <input
+            id="terminalInput"
+            type="text"
+            autocomplete="off"
+            placeholder="Type a command..."
+            onkeydown="runTerminal(event)"
+        >
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- =========================
+     CREATOR COMMAND CENTER
+========================= -->
+
+<section class="creator-panel" id="creatorPanel">
+
+
+    <h2>
+        👑 EMY COMMAND CENTER
+    </h2>
+
+
+    <div class="command-grid">
+
+
+        <!-- SYSTEM CARD -->
+
+        <div class="command-card">
+
+          <h3>
+    🖥 SYSTEM
+</h3>
+
+<p>
+    Website:
+    <span class="online">
+        ONLINE
+    </span>
+</p>
+
+<p>
+    Terminal:
+    <span class="online">
+        ACTIVE
+    </span>
+</p>
+
+<p>
+    Security:
+    <span class="root">
+        ROOT
+    </span>
+</p>
+
+<hr>
+
+<p>
+    🌐 Visitors:
+    <span id="visitorCount">
+        1
+    </span>
+</p>
+
+<p>
+    ⏱ Session:
+    <span id="sessionTimer">
+        00:00:00
+    </span>
+</p>
+
+<p>
+    ⚡ CPU:
+    <span id="cpuStatus">
+        Stable
+    </span>
+</p>
+
+<p>
+    📡 Network:
+    <span id="networkStatus">
+        Connected
+    </span>
+</p>
+
+
+        </div>
+
+        <div class="command-card">
+
+    <h3>📊 VISITOR INTELLIGENCE</h3>
+
+    <p>
+        👥 Total Visits:
+        <span id="visitCount">0</span>
+    </p>
+
+    <p>
+        🎮 Games Played:
+        <span id="gamesPlayed">0</span>
+    </p>
+
+    <p>
+        💻 Commands Used:
+        <span id="commandCount">0</span>
+    </p>
+
+    <p>
+        👑 Creator Logins:
+        <span id="creatorCount">0</span>
+    </p>
+
+</div>
+
+<div class="command-card">
+
+    <h3>📜 LIVE ACTIVITY</h3>
+
+    <div id="activityLog">
+
+        <p>System started...</p>
+
+    </div>
+
+</div>
+
+
+
+
+        <!-- GAMES CARD -->
+
+        <div class="command-card">
+
+            <h3>
+                🎮 GAMES
+            </h3>
+
+
+            <p>
+                Guess Game:
+                <span class="online">
+                    ACTIVE
+                </span>
+            </p>
+
+
+            <p>
+                RPS:
+                <span class="online">
+                    ACTIVE
+                </span>
+            </p>
+
+
+            <p>
+                Game Master:
+                <span class="root">
+                    ENABLED
+                </span>
+            </p>
+
+
+        </div>
+
+
+
+
+
+        <!-- SECURITY CARD -->
+
+        <div class="command-card">
+
+            <h3>
+                🛡 SECURITY
+            </h3>
+
+
+            <p>
+                Access:
+                <span class="root">
+                    CREATOR
+                </span>
+            </p>
+
+
+            <p>
+                Firewall:
+                <span class="online">
+                    ONLINE
+                </span>
+            </p>
+
+
+            <p>
+                System:
+                <span class="online">
+                    STABLE
+                </span>
+            </p>
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+    <div class="creator-controls">
+
+
+        <h3>
+            ⚙ Creator Controls
+        </h3>
+
+
+
+        <button onclick="runDiagnostics()">
+            🔍 System Check
+        </button>
+
+
+
+        <button onclick="toggleMatrix()">
+            🌧 Matrix Control
+        </button>
+
+
+
+        <button onclick="revealNumber()">
+            🎯 Reveal Number
+        </button>
+
+
+
+        <button onclick="addWin()">
+            🏆 Add Win
+        </button>
+
+
+
+        <button onclick="resetGameScore()">
+            🔄 Reset Scores
+        </button>
+
+
+    </div>
+
+
+
+</section>
+
+<!-- ================= ABOUT ================= -->
+
+<section id="about" class="card">
+
+    <section class="card" id="about">
+
+    <h2>👋 About Me</h2>
+
+    <p>
+        Hello! I'm <strong>Emy</strong>, a passionate aspiring
+        <strong>Web Developer</strong> and
+        <strong>Cybersecurity Enthusiast</strong>
+    </p>
+
+    <p>
+        I enjoy creating beautiful websites, solving programming challenges,
+        and learning how technology works behind the scenes.
+    </p>
+
+    <p>
+        My goal is to become a professional Software Engineer,
+        build useful applications, contribute to open-source projects,
+        and eventually work with top technology companies around the world.
+    </p>
+
+    <p>
+        Every project on this website represents another step in my journey.
+        This portfolio will continue to grow as I learn new technologies.
+    </p>
+
+</section>
+
+<section class="card">
+
+    <h2>⚡ Quick Facts</h2>
+
+    <div class="facts">
+
+        <div class="fact">
+            💻
+            <h3>Developer</h3>
+            <p>Building modern websites.</p>
+        </div>
+
+        <div class="fact">
+            🛡️
+            <h3>Cybersecurity</h3>
+            <p>Learning ethical hacking.</p>
+        </div>
+
+        <div class="fact">
+            🚀
+            <h3>Goal</h3>
+            <p>Become a Software Engineer.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= SKILLS ================= -->
+
+<section class="card" id="skills">
+
+    <h2>💻 Skills</h2>
+
+    <div class="skill">
+
+        <p>HTML</p>
+
+        <div class="progress">
+
+            <div class="progress-bar html">90%</div>
+
+        </div>
+
+    </div>
+
+    <div class="skill">
+
+        <p>CSS</p>
+
+        <div class="progress">
+
+            <div class="progress-bar css">80%</div>
+
+        </div>
+
+    </div>
+
+    <div class="skill">
+
+        <p>JavaScript</p>
+
+        <div class="progress">
+
+            <div class="progress-bar js">65%</div>
+
+        </div>
+
+    </div>
+
+    <div class="skill">
+
+        <p>Cybersecurity</p>
+
+        <div class="progress">
+
+            <div class="progress-bar cyber">35%</div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= PROJECTS ================= -->
+
+<section class="card" id="projects">
+
+    <h2>🚀 Featured Projects</h2>
+
+    <p>
+        Here are some interactive projects I've built while learning web development.
+    </p>
+
+    <div class="project-grid">
+
+        <div class="project-card">
+
+            <h3>🎯 Guess Game</h3>
+
+            <p>
+                A simple number guessing game built with JavaScript.
+            </p>
+
+            <div class="tech-stack">
+
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+
+            </div>
+
+            <button onclick="loadProject('guess')">
+                ▶ Launch
+            </button>
+
+        </div>
+
+        <div class="project-card">
+
+            <h3>🔐 Password Generator</h3>
+
+            <p>
+                Generates strong random passwords instantly.
+            </p>
+
+            <div class="tech-stack">
+
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+
+            </div>
+
+            <button onclick="loadProject('password')">
+                ▶ Launch
+            </button>
+
+        </div>
+
+        <div class="project-card">
+
+            <h3>⏰ Live Clock</h3>
+
+            <p>
+                Displays the current time updating every second.
+            </p>
+
+            <div class="tech-stack">
+
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+
+            </div>
+
+            <button onclick="loadProject('clock')">
+                ▶ Launch
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="project-card">
+
+    <h3>✂️ Rock Paper Scissors</h3>
+
+    <p>
+        Play against the computer and see if you can win.
+    </p>
+
+    <div class="tech-stack">
+
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JavaScript</span>
+
+    </div>
+
+    <button onclick="loadProject('rps')">
+        ▶ Launch
+    </button>
+
+</div>
+
+    <div id="appArea">
+
+    <div class="game-start">
+
+        <h2>🎮 Choose a Game</h2>
+
+        <p>Select one of the games above to start playing.</p>
+
+    </div>
+
+</div>
+
+</section>
+
+</section>
+
+<!-- ================= ARTISTS ================= -->
+
+<section id="artists" class="card">
+
+    <h2>🎵 Favourite Artists</h2>
+
+    <ul>
+
+        <li>Wizkid</li>
+
+        <li>BNXN</li>
+
+        <li>Dave</li>
+
+    </ul>
+
+</section>
+
+<!-- ================= ALBUMS ================= -->
+
+<section id="albums" class="card">
+
+    <h2>💿 Favourite Albums</h2>
+
+    <ul>
+
+        <li>Made In Lagos</li>
+
+        <li>Captain</li>
+
+        <li>The Boy Who Played The Harp</li>
+
+    </ul>
+
+</section>
+
+<!-- ================= CONTACT ================= -->
+
+<section id="contact" class="card">
+
+    <h2>🌍 Connect With Me</h2>
+
+    <div class="social-icons">
+
+        <a href="https://twitter.com/IamEmyRex"
+           target="_blank"
+           class="icon">
+
+            🐦
+
+        </a>
+
+        <a href="mailto:frikkylord@gmail.com" class="contact-btn">
+    📩 Contact Me
+</a>
+
+        <a class="icon disabled">
+
+            💻
+
+        </a>
+
+        <a class="icon disabled">
+
+            💼
+
+        </a>
+
+    </div>
+
+</section>
+
+<!-- ================= TOP BUTTON ================= -->
+
+<button id="topBtn"
+        onclick="topFunction()">
+
+    ⬆
+
+</button>
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+
+        © 2026 Emy's World
+
+    </p>
+
+</footer>
+
+<script src="js/script.js"></script>
+
+</body>
+
+</html>
