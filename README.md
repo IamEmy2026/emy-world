@@ -1,18 +1,18 @@
 # 🌍 Emy's World
 
-![Portfolio](https://img.shields.io/badge/Portfolio-Live-cyan)
+![Portfolio](https://img.shields.io/badge/Status-Live-success)
 
 My personal developer portfolio built from scratch using HTML, CSS, and JavaScript.
 
-Live Website:
+🌐 Live Website:
 
-🚀 https://iamemy2026.github.io/emy-world/
+https://iamemy2026.github.io/emy-world/
 
 ---
 
-## 💻 About
+## 👨‍💻 About
 
-Emy's World is my interactive developer portfolio where I document my journey into:
+Emy's World is my interactive portfolio where I document my journey into:
 
 - Web Development
 - JavaScript
@@ -23,21 +23,19 @@ Emy's World is my interactive developer portfolio where I document my journey in
 
 ## ✨ Features
 
-🔥 Interactive Hero Section
-
 💻 Developer Terminal
 
 🟢 Matrix Mode
 
-🎮 Mini Games
+🎮 Interactive Games
 
 🔐 Secret Creator Access
 
 👑 Creator Command Center
 
-📊 Live System Monitoring
-
 📱 Responsive Mobile Design
+
+⚡ Animated User Interface
 
 ---
 
@@ -51,24 +49,23 @@ Emy's World is my interactive developer portfolio where I document my journey in
 
 ---
 
-## 📂 Project Structure
-
 
 ---
 
-## 🚀 Future Upgrades
+## 🚀 Future Plans
 
 - Spotify integration
-- Background music system
+- Background music controls
 - More cybersecurity projects
-- More interactive tools
+- More interactive features
 
 ---
 
-## 👨‍💻 Creator
+## 👑 Creator
 
 Created by **Emy**
 
 GitHub:
-
 https://github.com/IamEmy2026
+
+## 📂 Project Structure
