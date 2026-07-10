@@ -1561,3 +1561,42 @@ function addActivity(message){
     log.prepend(line);
 
 }
+
+// ===============================
+// CYBER AUDIO SYSTEM
+// ===============================
+
+
+let cyberAudio = document.getElementById("cyberAudio");
+
+
+function activateCyberSound(){
+
+    cyberAudio.play();
+
+}
+
+
+function pauseCyberSound(){
+
+    cyberAudio.pause();
+
+}
+
+
+let volumeControl =
+document.getElementById("volumeControl");
+
+
+if(volumeControl){
+
+volumeControl.addEventListener(
+"input",
+function(){
+
+cyberAudio.volume =
+this.value;
+
+});
+
+}

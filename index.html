@@ -392,6 +392,48 @@
 
     </div>
 
+    <!-- CYBER AUDIO SYSTEM -->
+
+<div class="audio-system">
+
+    <h3>🎧 Cyber Audio System</h3>
+
+    <p>
+        Command Center soundtrack controls.
+    </p>
+
+
+    <button onclick="activateCyberSound()">
+        ▶ Activate Sound
+    </button>
+
+
+    <button onclick="pauseCyberSound()">
+        ⏸ Pause
+    </button>
+
+
+    <label>
+        🔊 Volume
+    </label>
+
+    <input 
+    type="range"
+    id="volumeControl"
+    min="0"
+    max="1"
+    step="0.1"
+    value="0.5">
+
+</div>
+
+
+<audio id="cyberAudio" loop>
+
+<source src="audio/cyber.mp3" type="audio/mp3">
+
+</audio>
+
 
 
 </section>
@@ -646,6 +688,83 @@
         <li>Dave</li>
 
     </ul>
+
+</section>
+
+<!-- MUSIC SECTION -->
+
+<section class="card music-section">
+
+    <h2>🎧 Emy's Coding Soundtrack</h2>
+
+<p>
+    The playlist behind my late-night builds, coding sessions, and creative ideas.
+</p>
+
+
+    <div class="music-artists">
+
+        <div class="artist">
+            🎤 Wizkid
+        </div>
+
+        <div class="artist">
+            🎤 BNXN
+        </div>
+
+        <div class="artist">
+            🎤 Dave
+        </div>
+
+    </div>
+
+
+  <h3>
+    🎵 My Coding Playlist
+</h3>
+
+<!-- MUSIC VISUALIZER -->
+
+<div class="now-playing">
+
+    <div class="vinyl">
+
+        🎧
+
+    </div>
+
+
+    <div class="track-info">
+
+        <h3>
+            🔴 NOW PLAYING
+        </h3>
+
+        <p>
+            Emy's Coding Soundtrack
+        </p>
+
+    </div>
+
+
+    <div class="equalizer">
+
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
+
+</div>
+
+
+<iframe data-testid="embed-iframe" style="border-radius:12px"
+src="https://open.spotify.com/embed/playlist/7bYX07uYdjdIxJtIwh0NZa?
+utm_source=generator&si=ef63ef1aef40409a" width="100%" height="352" frameBorder="0"
+allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen;
+picture-in-picture" loading="lazy"></iframe>
 
 </section>
 

@@ -1645,3 +1645,290 @@ translateY(0);
 }
 
 }
+
+/* =========================
+   MUSIC SECTION
+========================= */
+
+
+.music-section{
+
+    text-align:center;
+
+}
+
+
+.music-artists{
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:20px;
+
+    margin:25px 0;
+
+}
+
+
+
+.artist{
+
+    padding:15px 25px;
+
+    border:1px solid cyan;
+
+    border-radius:30px;
+
+    color:cyan;
+
+    background:rgba(0,255,255,.05);
+
+    transition:.3s;
+
+}
+
+
+
+.artist:hover{
+
+    background:cyan;
+
+    color:black;
+
+    transform:translateY(-5px);
+
+    box-shadow:0 0 25px cyan;
+
+}
+
+/* =========================
+   CYBER AUDIO SYSTEM
+========================= */
+
+
+.audio-system{
+
+    margin-top:30px;
+
+    padding:25px;
+
+    border:1px solid cyan;
+
+    border-radius:18px;
+
+    background:rgba(0,255,255,.05);
+
+    text-align:center;
+
+    box-shadow:0 0 20px rgba(0,255,255,.3);
+
+}
+
+
+.audio-system h3{
+
+    color:cyan;
+
+    text-shadow:0 0 10px cyan;
+
+}
+
+
+.audio-system input{
+
+    width:80%;
+
+    margin-top:15px;
+
+}
+
+/* =========================
+   MUSIC VISUALIZER
+========================= */
+
+
+.now-playing{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:25px;
+
+    flex-wrap:wrap;
+
+    margin:30px 0;
+
+    padding:25px;
+
+    border:1px solid cyan;
+
+    border-radius:20px;
+
+    background:rgba(0,255,255,.05);
+
+    box-shadow:
+    0 0 25px rgba(0,255,255,.3);
+
+}
+
+
+
+.vinyl{
+
+    width:90px;
+
+    height:90px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:40px;
+
+    background:
+
+    radial-gradient(circle,#111 20%,cyan 21%,#050505 60%);
+
+    animation:spinVinyl 5s linear infinite;
+
+    box-shadow:
+
+    0 0 30px cyan;
+
+}
+
+
+
+@keyframes spinVinyl{
+
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+
+
+.track-info h3{
+
+    color:#ff3333;
+
+    text-shadow:
+
+    0 0 10px red;
+
+}
+
+
+
+.track-info p{
+
+    color:white;
+
+}
+
+
+
+/* EQUALIZER */
+
+
+.equalizer{
+
+    display:flex;
+
+    align-items:flex-end;
+
+    gap:6px;
+
+    height:50px;
+
+}
+
+
+
+.equalizer span{
+
+    width:8px;
+
+    height:20px;
+
+    background:cyan;
+
+    box-shadow:
+
+    0 0 10px cyan;
+
+    animation:
+
+    bounce 1s infinite;
+
+}
+
+
+
+.equalizer span:nth-child(2){
+
+    animation-delay:.2s;
+
+}
+
+
+.equalizer span:nth-child(3){
+
+    animation-delay:.4s;
+
+}
+
+
+.equalizer span:nth-child(4){
+
+    animation-delay:.6s;
+
+}
+
+
+.equalizer span:nth-child(5){
+
+    animation-delay:.8s;
+
+}
+
+
+
+@keyframes bounce{
+
+
+    0%,100%{
+
+        height:15px;
+
+    }
+
+
+    50%{
+
+        height:50px;
+
+    }
+
+}
