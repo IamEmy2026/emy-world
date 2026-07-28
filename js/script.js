@@ -1,132 +1,209 @@
-// =========================
-// EMY'S WORLD SCRIPT
-// PART 1 - CORE SYSTEMS
-// =========================
+// =======================================
+// EMY'S WORLD
+// CLEAN JAVASCRIPT SYSTEM
+// PART 1 - CORE SYSTEM
+// =======================================
 
 
-// =========================
+// =======================================
 // GLOBAL VARIABLES
-// =========================
+// =======================================
 
 let darkMode = true;
-
-let developerMode = false;
-
 let matrixMode = false;
 
-// =========================
-// VISITOR INTELLIGENCE
-// =========================
-
 let visitCount = 0;
-
-let gamesPlayed = 0;
-
 let commandCount = 0;
-
+let gamesPlayed = 0;
 let creatorCount = 0;
+let windowZ = 100;
+
+{}
 
 
-// =========================
+// =======================================
+// EMY OS BOOT
+// =======================================
+
+window.addEventListener("load",()=>{
+
+const boot=get("bootScreen");
+
+const output=get("bootOutput");
+
+const bar=get("bootProgressBar");
+
+if(!boot||!output||!bar) return;
+
+const lines=[
+
+"Initializing Kernel.............OK",
+
+"Loading Portfolio...............OK",
+
+"Loading Cyber Lab...............OK",
+
+"Loading Developer Terminal......OK",
+
+"Loading Security Services.......OK",
+
+"Authenticating Visitor..........OK",
+
+"",
+
+"ACCESS GRANTED",
+
+"",
+
+"Welcome to Emy's World."
+
+];
+
+let index=0;
+
+function next(){
+
+if(index>=lines.length){
+
+setTimeout(()=>{
+
+boot.style.transition="opacity .8s";
+
+boot.style.opacity="0";
+
+setTimeout(()=>{
+
+boot.style.display="none";
+
+const desktop = document.getElementById("emyDesktop");
+
+if(desktop){
+
+desktop.style.display="block";
+
+}
+
+startClock();
+
+},800);
+
+},900);
+
+return;
+
+}
+
+bar.style.width=((index+1)/lines.length*100)+"%";
+
+const line=document.createElement("div");
+
+line.textContent=lines[index];
+
+output.appendChild(line);
+
+index++;
+
+setTimeout(next,420);
+
+}
+
+next();
+
+addActivity("🚀 EMY OS Boot Complete");
+
+
+});
+
+
+
+
+
+// =======================================
 // TYPEWRITER TITLE
-// =========================
+// =======================================
 
-const title = document.getElementById("title");
+const titleText =
+"Welcome to Emy's World";
 
-const titleText = "Welcome to Emy's World";
 
 let titleIndex = 0;
 
 
 function typeWriter(){
 
+
+    const title = get("title");
+
+
     if(!title) return;
 
 
     if(titleIndex < titleText.length){
 
-        title.innerHTML += titleText.charAt(titleIndex);
+
+        title.innerHTML +=
+        titleText.charAt(titleIndex);
+
 
         titleIndex++;
 
-        setTimeout(typeWriter,80);
+
+        setTimeout(
+            typeWriter,
+            80
+        );
+
 
     }
+
 
 }
 
 
 
-// =========================
+// =======================================
 // THEME SYSTEM
-// =========================
+// =======================================
+
+const themeButton =
+get("themeButton");
 
 
-function changeTheme(){
 
-    const button =
-    document.getElementById("themeButton");
+if(themeButton){
+
+
+themeButton.addEventListener("click",()=>{
+
+
+    document.body.classList.toggle("light");
+
+
+    darkMode =
+    !darkMode;
+
 
 
     if(darkMode){
 
-        document.body.style.background="#ffffff";
-
-        document.body.style.color="#111";
+        themeButton.innerHTML="🌙";
 
 
-        if(button){
-
-            button.innerHTML="🌙 Dark Mode";
-
-        }
+        addActivity(
+        "🌙 Dark Mode activated"
+        );
 
 
     }else{
 
 
-        document.body.style.background="#111";
-
-        document.body.style.color="cyan";
+        themeButton.innerHTML="☀️";
 
 
-        if(button){
+        addActivity(
+        "☀️ Light Mode activated"
+        );
 
-            button.innerHTML="☀️ Light Mode";
-
-        }
-
-    }
-
-
-    darkMode = !darkMode;
-
-}
-
-
-
-// =========================
-// SCROLL TO TOP
-// =========================
-
-
-const topBtn =
-document.getElementById("topBtn");
-
-
-window.addEventListener("scroll",()=>{
-
-
-    if(!topBtn) return;
-
-
-    if(window.scrollY > 300){
-
-        topBtn.style.display="block";
-
-    }else{
-
-        topBtn.style.display="none";
 
     }
 
@@ -134,340 +211,14 @@ window.addEventListener("scroll",()=>{
 });
 
 
-
-function topFunction(){
-
-    window.scrollTo({
-
-        top:0,
-
-        behavior:"smooth"
-
-    });
-
-}
-
-
-
-// =========================
-// START WEBSITE
-// =========================
-
-
-window.onload = ()=>{
-
-
-    if(title){
-
-        title.innerHTML="";
-
-        titleIndex=0;
-
-        typeWriter();
-
-    }
-
-    loadVisitorData();
-
-visitCount++;
-
-saveVisitorData();
-
-updateVisitorPanel();
-
-addActivity("👤 Visitor entered website");
-
-
-};
-
-
-
-// =========================
-// PARTICLE BACKGROUND
-// =========================
-
-
-const canvas =
-document.getElementById("particles");
-
-
-if(canvas){
-
-
-const ctx =
-canvas.getContext("2d");
-
-
-canvas.width =
-window.innerWidth;
-
-
-canvas.height =
-window.innerHeight;
-
-
-
-let particles=[];
-
-
-
-for(let i=0;i<80;i++){
-
-
-    particles.push({
-
-        x:Math.random()*canvas.width,
-
-        y:Math.random()*canvas.height,
-
-        size:Math.random()*3,
-
-        speed:Math.random()*1
-
-    });
-
-
-}
-
-
-
-function animateParticles(){
-
-
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-
-    ctx.fillStyle="cyan";
-
-
-    particles.forEach(p=>{
-
-
-        ctx.beginPath();
-
-        ctx.arc(
-            p.x,
-            p.y,
-            p.size,
-            0,
-            Math.PI*2
-        );
-
-        ctx.fill();
-
-
-
-        p.y -= p.speed;
-
-
-
-        if(p.y<0){
-
-            p.y=canvas.height;
-
-        }
-
-
-    });
-
-
-
-    requestAnimationFrame(
-        animateParticles
-    );
-
-
-}
-
-
-
-animateParticles();
-
-
-
-window.addEventListener(
-"resize",
-()=>{
-
-canvas.width =
-window.innerWidth;
-
-canvas.height =
-window.innerHeight;
-
-});
-
-
-}
-
-// =========================
-// PART 2 - DEVELOPER TERMINAL
-// =========================
-
-
-const output =
-document.getElementById("terminalOutput");
-
-const terminalInput =
-document.getElementById("terminalInput");
-
-
-
-function printTerminal(message){
-
-    if(!output) return;
-
-
-    let line =
-    document.createElement("p");
-
-
-    line.innerHTML = message;
-
-
-    output.appendChild(line);
-
-
-    output.scrollTop =
-    output.scrollHeight;
-
-}
-
-
-
-// =========================
-// TERMINAL COMMAND SYSTEM
-// =========================
-
-
-function runTerminal(event){
-
-
-    if(event.key !== "Enter") return;
-
-    commandCount++;
-
-    addActivity("👑 Creator Mode enabled");
-
-saveVisitorData();
-
-updateVisitorPanel();
-
-
-    let command =
-    terminalInput.value
-    .toLowerCase()
-    .trim();
-
-
-
-    printTerminal(
-    "emy@portfolio:~$ " + command
-    );
-
-
-    terminalInput.value="";
-
-
-
-    if(command==="help"){
-
-
-        printTerminal(
-        "Commands:"
-        );
-
-
-        printTerminal(
-        "matrix - Toggle Matrix Mode"
-        );
-
-
-        printTerminal(
-        "hack - Hollywood Hacker Simulator"
-        );
-
-
-        printTerminal(
-        "sudo emy - Creator Access"
-        );
-    
-        addActivity("👑 Creator Mode enabled");
-
-
-        printTerminal(
-        "clear - Clear terminal"
-        );
-
-
-    }
-
-
-
-    else if(command==="clear"){
-
-
-        output.innerHTML="";
-
-
-    }
-
-
-
-    else if(command==="matrix"){
-
-
-        toggleMatrix();
-
-
-    }
-
-
-
-    else if(command==="hack"){
-
-
-        runHack();
-
-
-    }
-
-
-
-    else if(command==="sudo emy"){
-
-
-        sudoEmy();
-
-
-    }
-
-
-
-    else{
-
-
-        printTerminal(
-        "❌ Command not found. Type help."
-        );
-
-
-    }
-
-
 }
 
 
 
 
-// =========================
+// =======================================
 // MATRIX MODE
-// =========================
+// =======================================
 
 
 function toggleMatrix(){
@@ -477,26 +228,25 @@ function toggleMatrix(){
     !matrixMode;
 
 
+    document.body.classList.toggle(
+        "matrix",
+        matrixMode
+    );
+
 
     if(matrixMode){
 
 
-        document.body.style.background="#000";
-
-
-        printTerminal(
-        "💚 Matrix Mode Activated."
+        addActivity(
+        "🟩 Matrix Mode activated"
         );
 
 
     }else{
 
 
-        document.body.style.background="#111";
-
-
-        printTerminal(
-        "🤍 Matrix Mode Disabled."
+        addActivity(
+        "⬛ Matrix Mode disabled"
         );
 
 
@@ -507,355 +257,802 @@ function toggleMatrix(){
 
 
 
-// =========================
-// HOLLYWOOD HACKER SIMULATOR
-// =========================
+// =======================================
+// START
+// =======================================
+
+typeWriter();
+
+// =======================================
+// PART 2 - TERMINAL SYSTEM
+// =======================================
 
 
-function runHack(){
+const terminalInput =
+get("terminalInput");
 
 
-    let steps=[
-
-
-    "🔗 Connecting to secure server...",
-
-
-    "✔ Connection established.",
-
-
-    "🔍 Scanning network ports...",
-
-
-    "✔ 48 ports discovered.",
-
-
-    "🔥 Bypassing firewall...",
-
-
-    "██████████ 100%",
-
-
-    "🔐 Encrypting security layers...",
-
-
-    "💾 Accessing database...",
-
-
-    "⚡ Injecting virtual payload...",
-
-
-    "📂 Downloading files...",
-
-
-    "██████████ 100%",
-
-
-    "🚨 ACCESS GRANTED",
-
-
-    "👨‍💻 Welcome Agent Emy."
-
-
-    ];
+const terminalOutput =
+get("terminalOutput");
 
 
 
-    let i=0;
+let commandHistory = [];
+
+let historyIndex = -1;
 
 
 
-    function nextStep(){
+// =======================================
+// TERMINAL PRINT
+// =======================================
 
 
-        if(i < steps.length){
+function printTerminal(text){
 
 
-            printTerminal(
-            steps[i]
-            );
-
-
-            i++;
-
-
-            setTimeout(
-            nextStep,
-            700
-            );
-
-
-        }
-
-
-    }
+    if(!terminalOutput)
+    return;
 
 
 
-    nextStep();
+    const line =
+    document.createElement("div");
+
+
+    line.innerHTML =
+    text;
+
+
+    terminalOutput.appendChild(line);
+
+
+
+    terminalOutput.scrollTop =
+    terminalOutput.scrollHeight;
 
 
 }
 
 
 
-// =========================
-// SECRET CREATOR ACCESS
-// =========================
+// =======================================
+// COMMAND DATABASE
+// =======================================
 
 
-function sudoEmy(){
+const commands = {
 
 
+help(){
 
-    printTerminal(
-    "🔐 Checking permissions..."
-    );
+printTerminal(`
+<b>AVAILABLE COMMANDS</b><br><br>
 
+about - About Emy<br>
+skills - My skills<br>
+projects - Projects list<br>
+clear - Clear terminal<br>
+matrix - Toggle Matrix mode<br>
+sudo emy - Creator access<br>
+cyberlab - Open Cyber Lab
 
-    setTimeout(()=>{
+`);
 
-
-        printTerminal(
-        "👤 User detected: Emy"
-        );
-
-
-    },600);
-
-
-
-    setTimeout(()=>{
-
-
-        printTerminal(
-        "🛡️ Access Level: ROOT"
-        );
-
-
-    },1200);
+},
 
 
 
-    setTimeout(()=>{
+about(){
+
+printTerminal(`
+<b>EMY'S WORLD</b><br><br>
+
+Future Web Developer & Cybersecurity Enthusiast 💻<br>
+
+Building websites, learning cybersecurity,
+and documenting the journey.
+
+`);
+
+},
 
 
-        printTerminal(
-        "⚡ Developer Mode: ENABLED"
-        );
+
+skills(){
+
+printTerminal(`
+<b>SKILLS</b><br><br>
+
+HTML<br>
+CSS<br>
+JavaScript<br>
+Cybersecurity Basics<br>
+Web Development
+
+`);
+
+},
 
 
-        developerMode=true;
 
-        creatorCount++;
+projects(){
+
+printTerminal(`
+<b>PROJECTS</b><br><br>
+
+🌐 My First Website<br>
+📝 Wikipedia Editing Journey<br>
+🛡 Future Cybersecurity Projects
+
+`);
+
+},
+
+
+
+clear(){
+
+if(terminalOutput)
+
+terminalOutput.innerHTML="";
+
+
+},
+
+
+
+matrix(){
+
+toggleMatrix();
+
+
+printTerminal(
+"🟩 Matrix command executed"
+);
+
+
+},
+
+
+
+"sudo emy"(){
+
+
+creatorCount++;
+
+
+addActivity(
+"👑 Creator mode accessed"
+);
+
+
+
+printTerminal(`
+
+<b>ACCESS GRANTED 👑</b><br><br>
+
+Welcome Creator.
+
+Developer privileges activated.
+
+`);
+
+
+},
+
+cyberlab(){
+
+
+printTerminal(`
+
+<b>🛡 ACCESSING CYBER LAB...</b><br><br>
+
+Loading security modules...
+
+<br>
+
+✓ Password Analyzer ONLINE<br>
+✓ Hash Engine ONLINE<br>
+✓ Encryption System ONLINE<br>
+✓ Network Scanner ONLINE<br>
+
+<br>
+
+<b>ACCESS GRANTED 🔥</b>
+
+`);
+
+
+
+addActivity(
+"🛡 Cyber Lab accessed from terminal"
+);
+
+
+
+const lab =
+get("cyberLab");
+
+
+
+if(lab){
+
+
+setTimeout(()=>{
+
+
+lab.scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+
+},800);
+
+
+}
+
+},
+
+"whoami"(){
+
+    printTerminal(`
+
+<b>EMY OS USER PROFILE</b>
+
+━━━━━━━━━━━━━━━━━━
+
+👤 Name:
+Emy
+
+💻 Role:
+Future Web Developer
+
+🛡 Focus:
+Cybersecurity Enthusiast
+
+🚀 Status:
+Building awesome projects.
+
+`);
+
+    addActivity("👤 whoami executed");
+
+},
+
+"about"(){
+
+    printTerminal(`
+
+<b>ABOUT EMY</b>
+
+━━━━━━━━━━━━━━━━━━
+
+I enjoy building websites,
+learning JavaScript,
+and exploring cybersecurity.
+
+Current goal:
+Become a professional developer.
+
+`);
+
+    addActivity("📄 About viewed");
+
+},
+
+"skills"(){
+
+    printTerminal(`
+
+<b>SKILLS</b>
+
+━━━━━━━━━━━━━━━━━━
+
+HTML        ██████████ 90%
+
+CSS         █████████░ 85%
+
+JavaScript  ███████░░░ 70%
+
+CyberSec    █████░░░░░ 50%
+
+`);
+
+    addActivity("📊 Skills viewed");
+
+},
+
+"projects"(){
+
+    printTerminal(`
+
+<b>PROJECT DATABASE</b>
+
+━━━━━━━━━━━━━━━━━━
+
+① My First Website
+
+STATUS: COMPLETE
+
+━━━━━━━━━━━━━━━━━━
+
+② Cyber Lab
+
+STATUS: ACTIVE
+
+━━━━━━━━━━━━━━━━━━
+
+③ Future Security Tools
+
+STATUS: DEVELOPMENT
+
+`);
+
+    addActivity("📁 Projects viewed");
+
+},
+
+"clear"(){
+
+    output.innerHTML = "";
+
+    addActivity("🧹 Terminal cleared");
+
+}
+
+};
+
+
+
+
+
+
+
+
+
+
+
+// =======================================
+// TERMINAL COMMAND RUNNER
+// =======================================
+
+
+function runTerminal(event){
+
+
+if(event.key !== "Enter")
+return;
+
+
+
+let command =
+terminalInput.value
+.toLowerCase()
+.trim();
+
+
+
+if(command === "")
+return;
+
+
+
+commandHistory.push(command);
+
+historyIndex =
+commandHistory.length;
+
+
+
+addActivity(
+"💻 Command: " + command
+);
+
+
+
+printTerminal(
+"emy@portfolio:~$ "
++ command
+);
+
+
+
+terminalInput.value="";
+
+
+
+// Execute command
+
+
+if(commands[command]){
+
+
+commands[command]();
+
+
+}
+
+else{
+
+
+printTerminal(
+"Command not found. Type help."
+);
+
+
+}
+
+
+
+}
+
+
+
+
+// =======================================
+// TERMINAL HISTORY
+// =======================================
+
+
+document.addEventListener(
+"keydown",
+(event)=>{
+
+
+if(!terminalInput)
+return;
+
+
+
+if(document.activeElement !== terminalInput)
+return;
+
+
+
+if(event.key === "ArrowUp"){
+
+
+if(commandHistory.length === 0)
+return;
+
+
+historyIndex--;
+
+
+if(historyIndex < 0)
+historyIndex=0;
+
+
+terminalInput.value =
+commandHistory[historyIndex];
+
+
+}
+
+
+
+if(event.key === "ArrowDown"){
+
+
+historyIndex++;
+
+
+if(historyIndex >= commandHistory.length){
+
+historyIndex =
+commandHistory.length;
+
+
+terminalInput.value="";
+
+
+return;
+
+}
+
+
+terminalInput.value =
+commandHistory[historyIndex];
+
+
+}
+
+
+});
+
+// =======================================
+// PART 3 - ACTIVITY + VISITOR INTELLIGENCE
+// =======================================
+
+
+
+let visitorData = {
+
+
+visits:0,
+
+commands:0,
+
+creator:0
+
+
+};
+
+
+
+// =======================================
+// LOAD DATA
+// =======================================
+
+
+function loadVisitorData(){
+
+
+const saved =
+localStorage.getItem(
+"emyVisitorData"
+);
+
+
+
+if(saved){
+
+
+visitorData =
+JSON.parse(saved);
+
+
+}
+
+
+}
+
+
+
+// =======================================
+// SAVE DATA
+// =======================================
+
+
+function saveVisitorData(){
+
+
+localStorage.setItem(
+
+"emyVisitorData",
+
+JSON.stringify(visitorData)
+
+);
+
+
+}
+
+
+
+// =======================================
+// ACTIVITY FEED
+// =======================================
+
+
+function addActivity(message){
+
+
+
+const feed =
+get("activityFeed");
+
+
+
+if(!feed)
+return;
+
+
+
+const item =
+document.createElement("div");
+
+
+
+let type =
+"SYSTEM";
+
+
+
+if(message.includes("Command"))
+
+type="TERMINAL";
+
+
+else if(message.includes("Creator"))
+
+type="CREATOR";
+
+
+else if(message.includes("Matrix"))
+
+type="MATRIX";
+
+
+else if(message.includes("Cyber"))
+
+type="CYBER";
+
+
+
+
+item.className =
+"activity-item "
++
+type.toLowerCase();
+
+
+
+item.innerHTML = `
+
+<b>${type}</b>
+
+<br>
+
+${new Date()
+.toLocaleTimeString()}
+
+<br>
+
+${message}
+
+`;
+
+
+
+feed.prepend(item);
+
+
+
+// keep latest 20
+
+while(feed.children.length > 20){
+
+feed.removeChild(
+feed.lastChild
+);
+
+}
+
+
+}
+
+
+
+// =======================================
+// VISITOR START
+// =======================================
+
+
+function startVisitorSession(){
+
+
+loadVisitorData();
+
+
+
+visitorData.visits++;
+
 
 saveVisitorData();
 
-updateVisitorPanel();
 
 
-
-    },1800);
-
-
-
-    setTimeout(()=>{
-
-
-        printTerminal(
-        "👑 Welcome, Creator."
-        );
-
-
-
-        let panel =
-        document.getElementById(
-        "creatorPanel"
-        );
-
-
-
-        if(panel){
-
-
-            panel.style.display="block";
-
-
-        }
-
-
-
-    },2400);
+addActivity(
+"👤 Visitor entered Emy's World"
+);
 
 
 
 }
 
-// =========================
-// PART 3 - GAMES HUB
-// =========================
 
 
-// =========================
-// GAME VARIABLES
-// =========================
+window.addEventListener(
+"load",
+()=>{
+
+startVisitorSession();
+
+});
+
+// =======================================
+// PART 4 - CYBER LAB SYSTEM
+// =======================================
 
 
-let secretNumber =
-Math.floor(Math.random()*10)+1;
+
+// =======================================
+// PASSWORD ANALYZER
+// =======================================
+
+
+function checkPassword(){
+
+
+const input =
+get("passwordInput");
+
+
+const result =
+get("passwordResult");
+
+
+if(!input || !result)
+return;
+
+
+
+let password =
+input.value;
 
 
 let score = 0;
 
-let bestScore = 0;
 
-let attempts = 5;
 
+if(password.length >= 8)
+score++;
 
 
-// =========================
-// LOAD PROJECTS
-// =========================
+if(/[A-Z]/.test(password))
+score++;
 
 
-function loadProject(type){
+if(/[0-9]/.test(password))
+score++;
 
-    gamesPlayed++;
 
-    addActivity("🎮 Opened: " + type);
+if(/[^A-Za-z0-9]/.test(password))
+score++;
 
-saveVisitorData();
 
-updateVisitorPanel();
 
+let message;
 
-    const app =
-    document.getElementById("appArea");
 
 
+if(score <= 1)
 
-    if(!app) return;
+message =
+"🔴 Weak Password";
 
 
+else if(score === 2)
 
-    // =====================
-    // GUESS GAME
-    // =====================
+message =
+"🟡 Medium Password";
 
 
-    if(type==="guess"){
+else if(score === 3)
 
+message =
+"🟢 Strong Password";
 
-        app.innerHTML = `
 
+else
 
-        <h2>🎯 Guess The Number</h2>
+message =
+"💎 Excellent Password";
 
 
-        <p>
-        Guess a number between 1 - 10
-        </p>
 
+result.innerHTML =
+message;
 
-        <p>
-        🏆 Score:
-        <span id="score">
-        ${score}
-        </span>
-        </p>
 
 
-        <p>
-        ❤️ Attempts:
-        <span id="attempts">
-        ${attempts}
-        </span>
-        </p>
-
-
-        <p>
-        🥇 Best Score:
-        <span id="bestScore">
-        ${bestScore}
-        </span>
-        </p>
-
-
-
-        <input 
-        id="guessInput"
-        type="number"
-        min="1"
-        max="10">
-
-
-
-        <br><br>
-
-
-        <button onclick="playGuess()">
-        Guess
-        </button>
-
-
-
-        <button onclick="restartGuess()">
-        Restart
-        </button>
-
-
-
-        <p id="guessResult"></p>
-
-
-        `;
-
-
-    }
-
-
-
-    // =====================
-    // ROCK PAPER SCISSORS
-    // =====================
-
-
-    if(type==="rps"){
-
-
-        app.innerHTML = `
-
-
-        <h2>✂️ Rock Paper Scissors</h2>
-
-
-        <p>
-        Choose your move:
-        </p>
-
-
-        <button onclick="playRPS('rock')">
-        🪨 Rock
-        </button>
-
-
-        <button onclick="playRPS('paper')">
-        📄 Paper
-        </button>
-
-
-        <button onclick="playRPS('scissors')">
-        ✂️ Scissors
-        </button>
-
-
-        <p id="rpsResult"></p>
-
-
-        `;
-
-
-    }
+addActivity(
+"🛡 Cyber password analysis completed"
+);
 
 
 }
@@ -863,136 +1060,64 @@ updateVisitorPanel();
 
 
 
-// =========================
-// GUESS GAME LOGIC
-// =========================
 
+// =======================================
+// HASH GENERATOR
+// =======================================
 
-function playGuess(){
 
+async function generateHash(){
 
 
-    const input =
-    document.getElementById(
-    "guessInput"
-    );
+const input =
+get("hashInput");
 
 
+const result =
+get("hashResult");
 
-    const result =
-    document.getElementById(
-    "guessResult"
-    );
 
 
+if(!input || !result)
+return;
 
-    if(!input || !result)
-    return;
 
 
+const data =
+new TextEncoder()
+.encode(input.value);
 
-    let guess =
-    Number(input.value);
 
 
+const hash =
+await crypto.subtle.digest(
+"SHA-256",
+data
+);
 
-    if(!guess){
 
 
-        result.innerHTML =
-        "⚠️ Enter a number.";
+const array =
+Array.from(
+new Uint8Array(hash)
+);
 
 
-        return;
 
+result.innerHTML =
+array
+.map(
+x =>
+x.toString(16)
+.padStart(2,"0")
+)
+.join("");
 
-    }
 
 
-
-    if(guess===secretNumber){
-
-
-
-        score++;
-
-
-
-        if(score>bestScore){
-
-            bestScore=score;
-
-        }
-
-
-
-        result.innerHTML =
-        "🎉 Correct! New number generated.";
-
-
-
-        secretNumber =
-        Math.floor(Math.random()*10)+1;
-
-
-
-        attempts=5;
-
-
-
-    }
-
-
-
-    else{
-
-
-        attempts--;
-
-
-
-        if(guess < secretNumber){
-
-
-            result.innerHTML =
-            "📉 Too low!";
-
-
-        }else{
-
-
-            result.innerHTML =
-            "📈 Too high!";
-
-
-        }
-
-
-
-        if(attempts<=0){
-
-
-            result.innerHTML =
-            "💀 Game Over! Number was "
-            + secretNumber;
-
-
-
-            attempts=5;
-
-
-            secretNumber =
-            Math.floor(Math.random()*10)+1;
-
-
-        }
-
-
-    }
-
-
-
-    updateGameStats();
+addActivity(
+"🔢 Hash generated"
+);
 
 
 }
@@ -1000,36 +1125,53 @@ function playGuess(){
 
 
 
-function restartGuess(){
+
+// =======================================
+// ENCRYPTION DEMO
+// =======================================
+
+
+function encryptText(){
+
+
+const input =
+get("encryptInput");
+
+
+const result =
+get("encryptResult");
+
+
+if(!input || !result)
+return;
 
 
 
-    score=0;
-
-    attempts=5;
-
-
-    secretNumber =
-    Math.floor(Math.random()*10)+1;
+let output="";
 
 
 
-    updateGameStats();
+for(let char of input.value){
+
+
+output +=
+String.fromCharCode(
+char.charCodeAt(0)+3
+);
+
+
+}
 
 
 
-    const result =
-    document.getElementById(
-    "guessResult"
-    );
+result.innerHTML =
+output;
 
 
-    if(result){
 
-        result.innerHTML =
-        "🔄 Game restarted.";
-
-    }
+addActivity(
+"🔒 Encryption demo used"
+);
 
 
 }
@@ -1037,310 +1179,224 @@ function restartGuess(){
 
 
 
-function updateGameStats(){
+
+// =======================================
+// NETWORK SCANNER
+// =======================================
 
 
-    let scoreBox =
-    document.getElementById("score");
+function runCyberScan(){
 
 
-    let attemptBox =
-    document.getElementById("attempts");
+const result =
+get("scanResult");
 
 
-    let bestBox =
-    document.getElementById("bestScore");
+if(!result)
+return;
 
 
 
-    if(scoreBox)
-    scoreBox.innerHTML=score;
+result.innerHTML="";
 
 
-    if(attemptBox)
-    attemptBox.innerHTML=attempts;
+
+let steps=[
+
+"🔍 Initializing scanner",
+
+"📡 Checking ports",
+
+"PORT 22 SSH OPEN",
+
+"PORT 80 HTTP OPEN",
+
+"PORT 443 HTTPS OPEN",
+
+"🛡 Firewall detected",
+
+"✅ Scan complete"
+
+];
 
 
-    if(bestBox)
-    bestBox.innerHTML=bestScore;
+
+let i=0;
+
+
+
+function scan(){
+
+
+if(i < steps.length){
+
+
+let line =
+document.createElement("p");
+
+
+line.innerHTML =
+steps[i];
+
+
+result.appendChild(line);
+
+
+i++;
+
+
+setTimeout(
+scan,
+700
+);
+
+
+}
+
+else{
+
+
+addActivity(
+"🛰 Cyber scan completed"
+);
+
+
+}
 
 
 }
 
 
 
-
-// =========================
-// ROCK PAPER SCISSORS
-// =========================
-
-
-function playRPS(player){
-
-
-    let choices=[
-
-        "rock",
-
-        "paper",
-
-        "scissors"
-
-    ];
-
-
-
-    let computer =
-    choices[
-    Math.floor(Math.random()*3)
-    ];
-
-
-
-    let result =
-    document.getElementById(
-    "rpsResult"
-    );
-
-
-
-    let message="";
-
-
-
-    if(player===computer){
-
-
-        message =
-        "🤝 Draw! Computer chose "
-        + computer;
-
-
-    }
-
-
-    else if(
-
-        (player==="rock" && computer==="scissors") ||
-
-        (player==="paper" && computer==="rock") ||
-
-        (player==="scissors" && computer==="paper")
-
-    ){
-
-
-        message =
-        "🏆 You win! Computer chose "
-        + computer;
-
-
-    }
-
-
-    else{
-
-
-        message =
-        "💀 You lose! Computer chose "
-        + computer;
-
-
-    }
-
-
-
-    if(result){
-
-        result.innerHTML =
-        message;
-
-    }
+scan();
 
 
 }
 
-// =========================
-// PART 4 - CREATOR PANEL
-// =========================
+// =======================================
+// SECURITY DASHBOARD
+// =======================================
+
+
+function loadSecurityDashboard(){
+
+
+const box =
+get("securityDashboard");
+
+
+if(!box)
+return;
 
 
 
-// =========================
-// SYSTEM DIAGNOSTICS
-// =========================
+let systems = [
 
+{
+name:"Password Security",
+score:80
+},
 
-function runDiagnostics(){
+{
+name:"Encryption Engine",
+score:90
+},
 
-
-    if(typeof printTerminal !== "function")
-    return;
-
-
-
-    printTerminal(
-    "🔍 Running system diagnostics..."
-    );
-
-
-
-    setTimeout(()=>{
-
-        printTerminal(
-        "✔ HTML System: ONLINE"
-        );
-
-    },500);
-
-
-
-    setTimeout(()=>{
-
-        printTerminal(
-        "✔ CSS System: ONLINE"
-        );
-
-    },1000);
-
-
-
-    setTimeout(()=>{
-
-        printTerminal(
-        "✔ JavaScript System: ONLINE"
-        );
-
-    },1500);
-
-
-
-    setTimeout(()=>{
-
-        printTerminal(
-        "✔ Terminal System: ONLINE"
-        );
-
-    },2000);
-
-
-
-    setTimeout(()=>{
-
-        printTerminal(
-        "🟢 All systems healthy."
-        );
-
-    },2500);
-
-
+{
+name:"Network Protection",
+score:70
 }
 
+];
 
 
-// =========================
-// CREATOR GAME MASTER
-// =========================
 
+box.innerHTML="";
 
 
-function revealNumber(){
 
+systems.forEach(system=>{
 
-    if(!developerMode){
 
+let container =
+document.createElement("div");
 
-        return;
 
 
-    }
+container.innerHTML = `
 
+<p>
+${system.name}
+</p>
 
 
-    printTerminal(
+<div style="
+width:100%;
+height:15px;
+background:#111;
+border:1px solid cyan;
+border-radius:10px;
+overflow:hidden;
+">
 
-    "🎯 Creator Override: Secret Number is "
-    + secretNumber
 
-    );
+<div style="
+width:${system.score}%;
+height:100%;
+background:cyan;
+box-shadow:0 0 15px cyan;
+">
+</div>
 
 
-}
+</div>
 
 
+<p>
+${system.score}%
+</p>
 
+`;
 
-function addWin(){
 
 
-    score++;
+box.appendChild(container);
 
 
 
-    if(score > bestScore){
+});
 
 
-        bestScore = score;
 
+let overall =
+Math.round(
+systems.reduce(
+(a,b)=>a+b.score,
+0
+)
+/ systems.length
+);
 
-    }
 
-    addActivity("🏆 Creator added a win");
 
+let final =
+document.createElement("h3");
 
 
-    updateGameStats();
+final.innerHTML =
+"Overall Security Score: "
++ overall
++ "%";
 
 
 
-    printTerminal(
+box.appendChild(final);
 
-    "🏆 Creator added a win."
 
-    );
 
-
-}
-
-
-
-
-function resetGameScore(){
-
-
-    score=0;
-
-    bestScore=0;
-
-    attempts=5;
-
-
-
-    updateGameStats();
-
-
-
-    printTerminal(
-
-    "🔄 Game statistics reset."
-
-    );
-
-
-}
-
-
-
-
-// =========================
-// CREATOR PANEL MATRIX CONTROL
-// =========================
-
-
-function creatorMatrix(){
-
-
-    toggleMatrix();
+addActivity(
+"🛡 Security dashboard loaded"
+);
 
 
 
@@ -1348,255 +1404,528 @@ function creatorMatrix(){
 
 
 
-// =========================
-// SECRET DEVELOPER COMMANDS
-// =========================
+window.addEventListener(
+"load",
+loadSecurityDashboard
+);
+
+// =======================================
+// LIVE HACKER DASHBOARD ENGINE
+// =======================================
 
 
-function developerCommand(command){
+function startHackerDashboard(){
 
 
-    if(command==="developer"){
+const cpu =
+get("cpuBar");
 
 
-        if(developerMode){
+const ram =
+get("ramBar");
 
 
-            let panel =
-            document.getElementById(
-            "creatorPanel"
-            );
+const traffic =
+get("networkTraffic");
 
 
-            if(panel){
-
-                panel.style.display="block";
-
-            }
+const packets =
+get("packetCount");
 
 
+const visitors =
+get("dashVisitors");
 
-            printTerminal(
-            "👑 Creator Panel Unlocked."
-            );
+
+const session =
+get("sessionTime");
 
 
 
-        }else{
 
+if(
+!cpu ||
+!ram ||
+!traffic ||
+!packets ||
+!visitors ||
+!session
+){
 
-            printTerminal(
-            "❌ Access denied."
-            );
-
-
-        }
-
-
-    }
-
+return;
 
 }
 
-// =========================
-// LIVE SYSTEM MONITOR
-// =========================
+// ============================
+// PERFORMANCE MONITOR
+// ============================
 
-let sessionSeconds = 0;
 
-setInterval(() => {
+setInterval(()=>{
 
-    sessionSeconds++;
 
-    let hours = Math.floor(sessionSeconds / 3600);
+let cpuValue =
+Math.floor(
+Math.random()*60
+)+20;
 
-    let minutes = Math.floor((sessionSeconds % 3600) / 60);
 
-    let seconds = sessionSeconds % 60;
+let ramValue =
+Math.floor(
+Math.random()*50
+)+30;
 
-    hours = String(hours).padStart(2,"0");
 
-    minutes = String(minutes).padStart(2,"0");
 
-    seconds = String(seconds).padStart(2,"0");
+cpu.style.width =
+cpuValue+"%";
 
-    const timer =
-    document.getElementById("sessionTimer");
 
-    if(timer){
+ram.style.width =
+ramValue+"%";
 
-        timer.innerHTML =
-        `${hours}:${minutes}:${seconds}`;
 
-    }
+get("cpuValue").innerHTML =
+cpuValue+"%";
+
+
+get("ramValue").innerHTML =
+ramValue+"%";
+
+
+
+},2000);
+
+
+
+
+// ============================
+// NETWORK MONITOR
+// ============================
+
+
+let packetTotal = 0;
+
+
+
+setInterval(()=>{
+
+
+let speed =
+Math.floor(
+Math.random()*900
+)+100;
+
+
+
+packetTotal +=
+Math.floor(
+Math.random()*20
+)+1;
+
+
+
+traffic.innerHTML =
+speed+" KB/s";
+
+
+
+packets.innerHTML =
+packetTotal;
+
+
 
 },1000);
 
 
 
-// Fake CPU monitor
+
+// ============================
+// VISITOR SYSTEM
+// ============================
+
 
 setInterval(()=>{
 
-    const cpu =
-    document.getElementById("cpuStatus");
 
-    if(!cpu) return;
+if(typeof visitorData !== "undefined"){
 
-    const states=[
 
-        "Stable",
+visitors.innerHTML =
+visitorData.visits;
 
-        "Normal",
 
-        "Optimal"
-
-    ];
-
-    cpu.innerHTML =
-
-    states[Math.floor(Math.random()*states.length)];
-
-},4000);
+}
 
 
 
-// Fake Network monitor
+},1000);
+
+
+
+
+// ============================
+// SESSION TIMER
+// ============================
+
+
+let seconds = 0;
+
+
 
 setInterval(()=>{
 
-    const network =
-    document.getElementById("networkStatus");
 
-    if(!network) return;
-
-    network.innerHTML="Connected";
-
-},5000);
-
-// =========================
-// VISITOR DATA STORAGE
-// =========================
-
-function loadVisitorData(){
-
-    visitCount =
-    Number(localStorage.getItem("visitCount")) || 0;
-
-    gamesPlayed =
-    Number(localStorage.getItem("gamesPlayed")) || 0;
-
-    commandCount =
-    Number(localStorage.getItem("commandCount")) || 0;
-
-    creatorCount =
-    Number(localStorage.getItem("creatorCount")) || 0;
-
-}
-
-function saveVisitorData(){
-
-    localStorage.setItem("visitCount",visitCount);
-
-    localStorage.setItem("gamesPlayed",gamesPlayed);
-
-    localStorage.setItem("commandCount",commandCount);
-
-    localStorage.setItem("creatorCount",creatorCount);
-
-}
-
-function updateVisitorPanel(){
-
-    const visit =
-    document.getElementById("visitCount");
-
-    const games =
-    document.getElementById("gamesPlayed");
-
-    const commands =
-    document.getElementById("commandCount");
-
-    const creator =
-    document.getElementById("creatorCount");
-
-    if(visit) visit.innerHTML = visitCount;
-
-    if(games) games.innerHTML = gamesPlayed;
-
-    if(commands) commands.innerHTML = commandCount;
-
-    if(creator) creator.innerHTML = creatorCount;
-
-}
-
-// =========================
-// LIVE ACTIVITY LOG
-// =========================
-
-function addActivity(message){
-
-    const log =
-    document.getElementById("activityLog");
-
-    if(!log) return;
-
-    const now = new Date();
-
-    const time =
-    now.toLocaleTimeString([],{
-
-        hour:"2-digit",
-
-        minute:"2-digit"
-
-    });
-
-    const line =
-    document.createElement("p");
-
-    line.innerHTML =
-    time + " — " + message;
-
-    log.prepend(line);
-
-}
-
-// ===============================
-// CYBER AUDIO SYSTEM
-// ===============================
+seconds++;
 
 
-let cyberAudio = document.getElementById("cyberAudio");
+let h =
+Math.floor(seconds/3600);
 
 
-function activateCyberSound(){
 
-    cyberAudio.play();
+let m =
+Math.floor(
+(seconds%3600)/60
+);
+
+
+
+let s =
+seconds%60;
+
+
+
+session.innerHTML =
+
+String(h).padStart(2,"0")
++":"
++
+String(m).padStart(2,"0")
++":"
++
+String(s).padStart(2,"0");
+
+
+
+},1000);
+
+
+
+addActivity(
+"🖥 Hacker Dashboard activated"
+);
+
+
 
 }
 
 
-function pauseCyberSound(){
 
-    cyberAudio.pause();
+// Start Dashboard
 
-}
-
-
-let volumeControl =
-document.getElementById("volumeControl");
+window.addEventListener(
+"load",
+()=>{
 
 
-if(volumeControl){
+startHackerDashboard();
 
-volumeControl.addEventListener(
-"input",
-function(){
-
-cyberAudio.volume =
-this.value;
 
 });
+
+
+
+// =====================================
+// START MENU
+// =====================================
+
+function toggleStartMenu(){
+
+const menu=document.getElementById("startMenu");
+
+if(!menu) return;
+
+if(menu.style.display==="block"){
+
+menu.style.display="none";
+
+}else{
+
+menu.style.display="block";
+
+}
+
+}
+
+// =====================================
+// AUTO CLOSE START MENU
+// =====================================
+
+document.addEventListener("click",(e)=>{
+
+const menu=document.getElementById("startMenu");
+
+const button=document.querySelector(".start-button");
+
+if(!menu || !button) return;
+
+if(
+
+!menu.contains(e.target)
+
+&&
+
+!button.contains(e.target)
+
+){
+
+menu.style.display="none";
+
+}
+
+});
+
+// =======================================
+// LIVE CLOCK
+// =======================================
+
+function startClock(){
+
+const clock=document.getElementById("taskClock");
+
+if(!clock) return;
+
+setInterval(()=>{
+
+const now=new Date();
+
+clock.innerHTML=
+
+now.toLocaleTimeString();
+
+},1000);
+
+}
+
+document.querySelectorAll(".desktop-shortcut").forEach(icon=>{
+
+icon.addEventListener("click",()=>{
+
+document
+
+.querySelectorAll(".desktop-shortcut")
+
+.forEach(i=>i.classList.remove("selected"));
+
+icon.classList.add("selected");
+
+});
+
+});
+
+// =====================================
+// EMY OS WINDOW DRAG SYSTEM
+// =====================================
+
+document.querySelectorAll(".drag-handle").forEach(header=>{
+
+let windowBox = header.parentElement;
+
+let offsetX = 0;
+let offsetY = 0;
+let dragging = false;
+
+header.addEventListener("mousedown",(e)=>{
+
+dragging = true;
+
+offsetX = e.clientX - windowBox.offsetLeft;
+offsetY = e.clientY - windowBox.offsetTop;
+
+windowBox.style.zIndex = Date.now();
+
+});
+
+document.addEventListener("mousemove",(e)=>{
+
+if(!dragging) return;
+
+windowBox.style.left =
+(e.clientX-offsetX)+"px";
+
+windowBox.style.top =
+(e.clientY-offsetY)+"px";
+
+// SAVE POSITION
+
+localStorage.setItem(
+"window-"+windowBox.id,
+JSON.stringify({
+left:windowBox.style.left,
+top:windowBox.style.top
+})
+);
+
+});
+
+document.addEventListener("mouseup",()=>{
+
+dragging = false;
+
+});
+
+});
+
+
+// =====================================
+// RESTORE WINDOW POSITIONS
+// =====================================
+
+window.addEventListener("load",()=>{
+
+document.querySelectorAll(".os-window").forEach(win=>{
+
+const saved = JSON.parse(
+localStorage.getItem("window-"+win.id)
+);
+
+if(saved){
+
+win.style.left = saved.left;
+win.style.top = saved.top;
+
+}
+
+});
+
+});
+// =====================================
+// DESKTOP SHORTCUT ACTIONS
+// =====================================
+
+const explorerShortcut = document.getElementById("explorerShortcut");
+
+if(explorerShortcut){
+
+explorerShortcut.addEventListener("dblclick",()=>{
+
+openExplorer();
+
+});
+
+}
+
+function analyzePassword(){
+
+const input=document.getElementById("passwordInput");
+
+const bar=document.getElementById("passwordStrengthBar");
+
+const text=document.getElementById("passwordStrengthText");
+
+if(!input||!bar||!text) return;
+
+let password=input.value;
+
+let score=0;
+
+if(password.length>=8) score++;
+
+if(/[A-Z]/.test(password)) score++;
+
+if(/[a-z]/.test(password)) score++;
+
+if(/[0-9]/.test(password)) score++;
+
+if(/[^A-Za-z0-9]/.test(password)) score++;
+
+let percent=score*20;
+
+bar.style.width=percent+"%";
+
+if(score<=1){
+
+bar.style.background="red";
+
+text.innerHTML="🔴 Weak Password";
+
+}
+
+else if(score<=3){
+
+bar.style.background="orange";
+
+text.innerHTML="🟡 Medium Password";
+
+}
+
+else{
+
+bar.style.background="lime";
+
+text.innerHTML="🟢 Strong Password";
+
+}
+
+}
+
+async function generateHash(){
+
+const input=document.getElementById("hashInput");
+
+const output=document.getElementById("hashOutput");
+
+if(!input||!output) return;
+
+const data=new TextEncoder().encode(input.value);
+
+const hashBuffer=await crypto.subtle.digest("SHA-256",data);
+
+const hashArray=Array.from(new Uint8Array(hashBuffer));
+
+const hashHex=hashArray.map(b=>b.toString(16).padStart(2,"0")).join("");
+
+output.value=hashHex;
+
+}
+
+function startNetworkScan(){
+
+const status=document.getElementById("scanStatus");
+
+if(!status) return;
+
+const lines=[
+
+"Scanning local network...",
+
+"Checking ports...",
+
+"Finding devices...",
+
+"Analyzing firewall...",
+
+"System Secure ✅"
+
+];
+
+let i=0;
+
+status.innerHTML="";
+
+function next(){
+
+if(i>=lines.length) return;
+
+status.innerHTML+=lines[i]+"<br>";
+
+i++;
+
+setTimeout(next,900);
+
+}
+
+next();
 
 }

@@ -18,9 +18,549 @@
 
 </head>
 
-<body>
 
-    <canvas id="particles"></canvas>
+
+   <body>
+
+<div id="bootScreen">
+
+    <div class="boot-logo">
+        EMY OS v2.0
+    </div>
+
+    <div id="bootProgressContainer">
+
+        <div id="bootProgressBar"></div>
+
+    </div>
+
+    <div id="bootOutput"></div>
+
+</div>
+
+<!-- =========================
+     EMY OS DESKTOP
+========================= -->
+
+<div id="emyDesktop" class="emy-desktop">
+
+    <div class="desktop-title">
+        🖥️ EMY OS v2.0
+    </div>
+
+
+    <div class="desktop-icons">
+
+<div class="desktop-shortcut" ondblclick="openWindow('terminalWindow')">
+
+<div class="shortcut-icon">
+
+💻
+
+</div>
+
+<div class="shortcut-label">
+
+Terminal
+
+</div>
+
+</div>
+
+
+
+<div class="desktop-shortcut" ondblclick="openWindow('dashboardWindow')">
+
+<div class="shortcut-icon">
+
+📊
+
+</div>
+
+<div class="shortcut-label">
+
+Dashboard
+
+</div>
+
+</div>
+
+
+
+<div class="desktop-shortcut" ondblclick="openWindow('aiWindow')">
+
+<div class="shortcut-icon">
+
+🤖
+
+</div>
+
+<div class="shortcut-label">
+
+EMY AI
+
+</div>
+
+</div>
+
+
+
+<div class="desktop-shortcut" ondblclick="openWindow('cyberWindow')">
+
+<div class="shortcut-icon">
+
+🛡
+
+</div>
+
+<div class="shortcut-label">
+
+Cyber Lab
+
+</div>
+
+</div>
+
+<div class="desktop-shortcut" id="explorerShortcut">
+
+<div class="desktop-shortcut" ondblclick="openExplorer()">
+
+<div class="shortcut-icon">
+📁
+</div>
+
+<div class="shortcut-label">
+Explorer
+</div>
+
+</div>
+
+    <!-- =========================
+     START MENU
+========================= -->
+
+<div class="start-header">
+
+<div class="profile-circle">
+
+👤
+
+</div>
+
+<div>
+
+<h3>
+
+EMY OS
+
+</h3>
+
+<p>
+
+Administrator
+
+</p>
+
+</div>
+
+</div>
+
+<div class="start-item" onclick="openWindow('terminalWindow')">
+
+💻 Terminal
+
+</div>
+
+<div class="start-item" onclick="openWindow('dashboardWindow')">
+
+📊 Dashboard
+
+</div>
+
+<div class="start-item" onclick="openWindow('aiWindow')">
+
+🤖 EMY AI
+
+</div>
+
+<div class="start-item" onclick="openWindow('cyberWindow')">
+
+🛡 Cyber Lab
+
+</div>
+
+<hr>
+
+<div class="start-item">
+
+👤 About Me
+
+</div>
+
+<div class="start-item">
+
+📂 Projects
+
+</div>
+
+<div class="start-item">
+
+⚙ Settings
+
+</div>
+
+<div class="start-item">
+
+🔒 Developer Mode
+
+</div>
+
+<hr>
+
+<div class="start-item">
+
+⏻ Shutdown
+
+</div>
+
+</div>
+
+    <div id="taskbar">
+
+<div class="taskbar-left">
+
+<button
+
+class="start-button"
+
+onclick="toggleStartMenu()"
+
+>
+
+🖥 EMY
+
+</button>
+
+<div id="runningApps">
+
+</div>
+
+</div>
+
+<div id="taskClock">
+
+00:00:00
+
+</div>
+
+</div>
+
+
+</div>
+
+<div id="fileViewerWindow" class="os-window">
+
+<div class="window-header drag-handle">
+
+📄 File Viewer
+
+<button onclick="closeWindow('fileViewerWindow')">
+X
+</button>
+
+</div>
+
+
+<div class="window-body">
+
+<div id="fileViewerContent">
+
+</div>
+
+</div>
+
+
+</div>
+
+<!-- TERMINAL WINDOW -->
+
+<div id="terminalWindow" class="os-window">
+
+<div class="window-header drag-handle">
+💻 Terminal
+<button onclick="closeWindow('terminalWindow')">X</button>
+</div>
+
+<div class="window-body">
+
+sudo emy
+
+<br><br>
+
+ACCESS GRANTED 👑
+
+</div>
+
+</div>
+
+
+
+<!-- DASHBOARD WINDOW -->
+
+<div id="dashboardWindow" class="os-window">
+
+<div class="window-header drag-handle">
+📊 Dashboard
+<button onclick="closeWindow('dashboardWindow')">X</button>
+</div>
+
+<div class="window-body">
+
+System Status: ONLINE
+
+<br>
+
+Firewall: ACTIVE
+
+<br>
+
+Network: CONNECTED
+
+</div>
+
+</div>
+
+
+
+<!-- AI WINDOW -->
+
+<div id="aiWindow" class="os-window">
+
+<div class="window-header drag-handle">🤖 EMY AI
+<button onclick="closeWindow('aiWindow')">X</button>
+</div>
+
+<div class="window-body">
+
+Hello Creator 👋
+
+</div>
+
+</div>
+
+
+
+<!-- CYBER WINDOW -->
+
+<div id="cyberWindow" class="os-window">
+
+<div class="window-header drag-handle">🛡️ Cyber Lab
+<button onclick="closeWindow('cyberWindow')">X</button>
+</div>
+
+<div class="window-body">
+
+<h2>🛡 EMY CYBER LAB</h2>
+
+<p class="online">
+<span class="led"></span>
+SYSTEM ONLINE
+</p>
+
+<br>
+
+<b>System Integrity</b>
+
+<div class="security-bar">
+<div class="security-fill" style="width:100%;"></div>
+</div>
+
+<b>Firewall</b>
+
+<div class="security-bar">
+<div class="security-fill" style="width:96%;"></div>
+</div>
+
+<b>Network Protection</b>
+
+<div class="security-bar">
+<div class="security-fill" style="width:88%;"></div>
+</div>
+
+<br>
+
+<div class="creator-controls">
+
+<button onclick="openWindow('passwordWindow')">
+🔑 Password Analyzer
+</button>
+
+<button onclick="openWindow('hashWindow')">
+🔢 Hash Generator
+</button>
+
+<button onclick="openWindow('networkWindow')">
+🌐 Network Scanner
+</button>
+
+<button onclick="openExplorer();loadExplorer('Secret Files')">
+🔒 Secret Files
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+ <div id="explorerWindow" class="os-window">
+
+<div class="window-header drag-handle">
+
+📁 File Explorer
+
+<button onclick="closeWindow('explorerWindow')">
+
+X
+
+</button>
+
+</div>
+
+<div class="window-body">
+
+<div id="explorerList">
+
+</div>
+
+</div>
+
+</div>
+
+<div id="passwordWindow" class="os-window">
+
+<div class="window-header drag-handle">
+🔑 Password Analyzer
+<button onclick="closeWindow('passwordWindow')">X</button>
+</div>
+
+<div class="window-body">
+
+<h3>Password Strength Analyzer</h3>
+
+<input
+id="passwordInput"
+type="password"
+placeholder="Enter password">
+
+<br><br>
+
+<button onclick="analyzePassword()">
+Analyze
+</button>
+
+<br><br>
+
+<div class="security-bar">
+<div id="passwordStrengthBar"
+class="security-fill"
+style="width:0%;">
+</div>
+</div>
+
+<p id="passwordStrengthText">
+Waiting...
+</p>
+
+</div>
+
+</div>
+
+<div id="hashWindow" class="os-window">
+
+<div class="window-header drag-handle">
+🔢 Hash Generator
+<button onclick="closeWindow('hashWindow')">X</button>
+</div>
+
+<div class="window-body">
+
+<h3>Hash Generator</h3>
+
+<input
+id="hashInput"
+placeholder="Type text">
+
+<br><br>
+
+<button onclick="generateHash()">
+Generate
+</button>
+
+<br><br>
+
+<textarea
+id="hashOutput"
+rows="5"
+style="width:100%;background:#111;color:cyan;"></textarea>
+
+</div>
+
+</div>
+
+<div id="networkWindow" class="os-window">
+
+<div class="window-header drag-handle">
+🌐 Network Scanner
+<button onclick="closeWindow('networkWindow')">X</button>
+</div>
+
+<div class="window-body">
+
+<div class="window-body">
+
+<h2>🌐 EMY NETWORK SCANNER</h2>
+
+<p class="online">
+<span class="led"></span>
+SCANNER READY
+</p>
+
+<br>
+
+<div class="security-bar">
+<div id="scanProgress" class="security-fill" style="width:0%;"></div>
+</div>
+
+<br>
+
+<button onclick="startNetworkScan()">
+🚀 Start Scan
+</button>
+
+<br><br>
+
+<div id="scanStatus">
+
+Waiting for scan...
+
+</div>
+
+</div>
+
+<nav>
+...
+</nav>
+
+<section>
+...
+</section>
+
+<footer>
+...
+</footer>
+
+</body>
 
 <!-- ================= NAVBAR ================= -->
 
@@ -33,9 +573,9 @@
     <a href="#albums">Albums</a>
     <a href="#contact">Contact</a>
 
-    <button id="themeButton" onclick="changeTheme()">
-        🌞 Light Mode
-    </button>
+    <button id="themeToggle">
+    🌙
+</button>
 
 </nav>
 
@@ -140,6 +680,7 @@
 
         <input
             id="terminalInput"
+            onkeydown="runTerminal(event)"
             type="text"
             autocomplete="off"
             placeholder="Type a command..."
@@ -178,8 +719,9 @@
 <p>
     Website:
     <span class="online">
-        ONLINE
-    </span>
+<span class="led"></span>
+ONLINE
+</span>
 </p>
 
 <p>
@@ -226,6 +768,29 @@
     </span>
 </p>
 
+<hr>
+
+<p>
+    🕒 Time:
+    <span id="liveClock">
+        --:--:--
+    </span>
+</p>
+
+<p>
+    🎨 Theme:
+    <span id="themeStatus">
+        Dark
+    </span>
+</p>
+
+<p>
+    💻 Version:
+    <span class="root">
+        EmyOS v2.1
+    </span>
+</p>
+
 
         </div>
 
@@ -257,11 +822,22 @@
 
 <div class="command-card">
 
-    <h3>📜 LIVE ACTIVITY</h3>
+    <h3>
+        📜 LIVE ACTIVITY
+    </h3>
 
-    <div id="activityLog">
 
-        <p>System started...</p>
+  <div id="activityFeed">
+
+    <div class="activity-item system">
+
+        <span class="activity-type">
+            SYSTEM
+        </span>
+
+        <p>
+            System Started...
+        </p>
 
     </div>
 
@@ -427,12 +1003,6 @@
 
 </div>
 
-
-<audio id="cyberAudio" loop>
-
-<source src="audio/cyber.mp3" type="audio/mp3">
-
-</audio>
 
 
 
@@ -673,6 +1243,445 @@
 
 </section>
 
+<!-- =========================
+CYBER LAB
+========================= -->
+
+<section id="cyberLab" class="cyber-lab">
+
+
+<h2>
+🛡 EMY CYBER LAB
+</h2>
+
+
+<p>
+Security experiments, coding tools, and cybersecurity learning.
+</p>
+
+
+
+<div class="cyber-grid">
+
+
+<div class="cyber-card">
+
+    <div class="cyber-card">
+
+<h3>
+🛡 Security Dashboard
+</h3>
+
+
+<div id="securityDashboard">
+
+Loading security systems...
+
+</div>
+
+
+</div>
+
+
+<h3>
+🔐 Password Checker
+</h3>
+
+
+<input 
+id="passwordInput"
+type="password"
+placeholder="Enter password">
+
+
+<button onclick="checkPassword()">
+Analyze
+</button>
+
+
+<p id="passwordResult"></p>
+
+
+</div>
+
+
+
+
+<div class="cyber-card">
+
+
+<h3>
+🔢 Hash Generator
+</h3>
+
+
+<input
+id="hashInput"
+placeholder="Enter text">
+
+
+<button onclick="generateHash()">
+Generate
+</button>
+
+
+<p id="hashResult"></p>
+
+
+</div>
+
+
+
+
+
+<div class="cyber-card">
+
+
+<h3>
+🔒 Encryption Demo
+</h3>
+
+
+<input
+id="encryptInput"
+placeholder="Text to encrypt">
+
+
+<button onclick="encryptText()">
+Encrypt
+</button>
+
+
+<p id="encryptResult"></p>
+
+
+</div>
+
+
+
+</div>
+
+<div class="cyber-card">
+
+<h3>
+🛰 Network Scanner
+</h3>
+
+
+<p>
+Educational security scan simulation.
+</p>
+
+
+<button onclick="runCyberScan()">
+Start Scan
+</button>
+
+
+<div id="scanResult">
+
+Waiting...
+
+</div>
+
+
+</div>
+
+<div class="cyber-card">
+
+<h3>
+🛡 Security Status
+</h3>
+
+
+<p>
+Password Security
+</p>
+
+<div class="security-bar">
+    <div class="security-fill password-fill">
+    </div>
+</div>
+
+
+
+<p>
+Encryption System
+</p>
+
+<div class="security-bar">
+    <div class="security-fill encryption-fill">
+    </div>
+</div>
+
+
+
+<p>
+Network Protection
+</p>
+
+<div class="security-bar">
+    <div class="security-fill network-fill">
+    </div>
+</div>
+
+
+
+<h3 id="securityScore">
+Overall Score: 82%
+</h3>
+
+
+</div>
+
+
+
+</section>
+
+<!-- =========================
+     EMY LIVE HACKER DASHBOARD
+========================= -->
+
+<section id="hackerDashboard" class="card">
+
+<h2>🖥️ EMY SYSTEM DASHBOARD</h2>
+
+<p>
+Live cybersecurity monitoring interface.
+</p>
+
+
+<div class="dashboard-grid">
+
+
+<div class="system-box">
+
+<h3>🖥️ System Status</h3>
+
+<p>
+Status:
+<span class="online">
+● ONLINE
+</span>
+</p>
+
+<p>
+Firewall:
+<span class="online">
+<span class="led"></span>
+ACTIVE
+</span>
+</p>
+
+<p>
+Encryption:
+<span class="online">
+<span class="led"></span>
+ENABLED
+</span>
+</p>
+
+</div>
+
+
+
+<div class="system-box">
+
+<h3>⚡ Performance</h3>
+
+<p>
+CPU Usage
+</p>
+
+<div class="status-bar">
+
+<div id="cpuBar"></div>
+
+</div>
+
+<span id="cpuValue">0%</span>
+
+
+<p>
+RAM Usage
+</p>
+
+<div class="status-bar">
+
+<div id="ramBar"></div>
+
+</div>
+
+<span id="ramValue">0%</span>
+
+
+</div>
+
+
+
+
+<div class="system-box">
+
+<h3>🌐 Network</h3>
+
+
+<p>
+Network:
+<span class="online">
+CONNECTED
+</span>
+</p>
+
+
+<p>
+Traffic:
+<span id="networkTraffic">
+0 KB/s
+</span>
+</p>
+
+
+<p>
+Packets:
+<span id="packetCount">
+0
+</span>
+</p>
+
+
+</div>
+
+
+
+
+<div class="system-box">
+
+<h3>👁 Visitor Intelligence</h3>
+
+
+<p>
+Visitors:
+<span id="dashVisitors">
+0
+</span>
+</p>
+
+
+<p>
+Session Time:
+<span id="sessionTime">
+00:00:00
+</span>
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+<!-- =====================================
+     LIVE CYBER ATTACK MAP
+====================================== -->
+
+<section id="attackMap" class="card">
+
+<h2>🌍 LIVE CYBER ATTACK MAP</h2>
+
+<p>
+Real-time simulated global cyber activity.
+</p>
+
+<div class="attack-container">
+
+<div class="attack-world">
+
+🌍
+
+<div class="attack-dot usa"></div>
+<div class="attack-dot uk"></div>
+<div class="attack-dot france"></div>
+<div class="attack-dot germany"></div>
+<div class="attack-dot nigeria"></div>
+<div class="attack-dot china"></div>
+<div class="attack-dot japan"></div>
+<div class="attack-dot brazil"></div>
+
+</div>
+
+<div class="attack-feed">
+
+<h3>⚠ Live Attack Feed</h3>
+
+<div id="attackLog">
+
+<p>Waiting for incoming traffic...</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =====================================
+     EMY AI ASSISTANT
+====================================== -->
+
+<section id="emyAI" class="card">
+
+<h2>🤖 EMY AI ASSISTANT</h2>
+
+<p>
+Ask me about Emy, the website, projects or cybersecurity.
+</p>
+
+<div class="ai-container">
+
+<div id="aiConversation" class="ai-conversation">
+
+<div class="ai-message">
+
+👋 Hello.
+
+I'm <strong>EMY AI</strong>.
+
+Type <strong>help</strong> to see what I can do.
+
+</div>
+
+</div>
+
+<div class="ai-input-row">
+
+<input
+
+id="aiInput"
+
+type="text"
+
+placeholder="Ask EMY AI..."
+
+onkeydown="runAI(event)"
+
+>
+
+<button onclick="runAI()">
+
+Send
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
 <!-- ================= ARTISTS ================= -->
 
 <section id="artists" class="card">
@@ -843,8 +1852,107 @@ picture-in-picture" loading="lazy"></iframe>
 
 </footer>
 
+<script src="js/utils.js"></script>
+
+<script src="js/achievements.js"></script>
+
+<script src="js/developer.js"></script>
+
+<script src="js/dashboard.js"></script>
+
+<script src="js/attackMap.js"></script>
+
+<script src="js/ai.js"></script>
+
+<script src="js/explorer.js"></script>
+
 <script src="js/script.js"></script>
 
-</body>
+<!-- =====================================
+     DEVELOPER MODE
+====================================== -->
 
-</html>
+<div id="developerPanel">
+
+<h2>👑 DEVELOPER MODE</h2>
+
+<p>
+
+Welcome, Developer.
+
+</p>
+
+<div class="developer-grid">
+
+<div class="developer-card">
+
+<h3>Website Version</h3>
+
+<p>
+
+EMY OS v2.0
+
+</p>
+
+</div>
+
+<div class="developer-card">
+
+<h3>Build Status</h3>
+
+<p id="buildStatus">
+
+Stable
+
+</p>
+
+</div>
+
+<div class="developer-card">
+
+<h3>Projects</h3>
+
+<p>
+
+4 Active
+
+</p>
+
+</div>
+
+<div class="developer-card">
+
+<h3>Security</h3>
+
+<p>
+
+Maximum
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- =====================================
+     ACHIEVEMENT POPUP
+====================================== -->
+
+<div id="achievementPopup">
+
+<div class="achievement-icon">
+
+🏆
+
+</div>
+
+<div class="achievement-text">
+
+<h3 id="achievementTitle">
+
+Achievement Unlocked
+
+</h3>
+
