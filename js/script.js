@@ -1066,63 +1066,64 @@ addActivity(
 // =======================================
 
 
-async function generateHash(){
+async function generateHash() {
 
+    const input = document.getElementById("hashInput");
+    const output = document.getElementById("hashOutput");
 
-const input =
-get("hashInput");
+    if (!input || !output) return;
 
+    const text = input.value;
 
-const result =
-get("hashResult");
+    if (!text) {
+        output.value = "⚠️ Enter some text first.";
+        return;
+    }
 
+    try {
 
+        const data = new TextEncoder().encode(text);
 
-if(!input || !result)
-return;
+        const hashBuffer = await crypto.subtle.digest(
+            "SHA-256",
+            data
+        );
 
+        const hashArray = Array.from(
+            new Uint8Array(hashBuffer)
+        );
 
+        const hashHex = hashArray
+            .map(byte => byte.toString(16).padStart(2, "0"))
+            .join("");
 
-const data =
-new TextEncoder()
-.encode(input.value);
+       output.value = hashHex;
 
+unlockAchievement("cryptographer");
 
+emyProfile.hashes++;
 
-const hash =
-await crypto.subtle.digest(
-"SHA-256",
-data
-);
+emyProfile.tools++;
 
+addXP(10);
 
+saveProfile();
 
-const array =
-Array.from(
-new Uint8Array(hash)
-);
-
-
-
-result.innerHTML =
-array
-.map(
-x =>
-x.toString(16)
-.padStart(2,"0")
-)
-.join("");
-
-
-
-addActivity(
-"🔢 Hash generated"
-);
-
-
+if (typeof addActivity === "function") {
+    addActivity("🔢 Hash generated");
 }
+unlockAchievement(
+    "cryptographer",
+    "Generate a SHA-256 hash"
+);
 
+    } catch (error) {
 
+        output.value = "❌ Unable to generate hash.";
+
+        console.error(error);
+    }
+}
 
 
 
@@ -1818,8 +1819,7 @@ openExplorer();
 
 function analyzePassword(){
 
-const input=document.getElementById("passwordInput");
-
+const input=document.getElementById("cyberPasswordInput");
 const bar=document.getElementById("passwordStrengthBar");
 
 const text=document.getElementById("passwordStrengthText");
@@ -1868,64 +1868,861 @@ text.innerHTML="🟢 Strong Password";
 
 }
 
-}
-
-async function generateHash(){
-
-const input=document.getElementById("hashInput");
-
-const output=document.getElementById("hashOutput");
-
-if(!input||!output) return;
-
-const data=new TextEncoder().encode(input.value);
-
-const hashBuffer=await crypto.subtle.digest("SHA-256",data);
-
-const hashArray=Array.from(new Uint8Array(hashBuffer));
-
-const hashHex=hashArray.map(b=>b.toString(16).padStart(2,"0")).join("");
-
-output.value=hashHex;
 
 }
 
-function startNetworkScan(){
+// =======================================
+// NETWORK SCANNER
+// =======================================
 
-const status=document.getElementById("scanStatus");
+function startNetworkScan() {
 
-if(!status) return;
+    const status = document.getElementById("scanStatus");
+    const progress = document.getElementById("scanProgress");
 
-const lines=[
 
-"Scanning local network...",
+    if (!status) return;
 
-"Checking ports...",
 
-"Finding devices...",
+    const lines = [
 
-"Analyzing firewall...",
+        "🛰 Initializing network scanner...",
+        "🔍 Scanning local network...",
+        "🔌 Checking common ports...",
+        "💻 Finding active devices...",
+        "🛡 Analyzing firewall status...",
+        "🔐 Checking security configuration...",
+        "━━━━━━━━━━━━━━━━━━━━",
+        "SCAN COMPLETE",
+        "Devices detected: 3",
+        "Common ports checked: 22, 80, 443",
+        "Firewall: ACTIVE ✅",
+        "Network status: SECURE 🟢"
 
-"System Secure ✅"
+    ];
 
-];
 
-let i=0;
+    let i = 0;
 
-status.innerHTML="";
 
-function next(){
+    status.innerHTML = "";
 
-if(i>=lines.length) return;
 
-status.innerHTML+=lines[i]+"<br>";
+    if (progress) {
 
-i++;
+        progress.style.width = "0%";
 
-setTimeout(next,900);
+    }
+
+
+
+    function next() {
+
+
+        if (i >= lines.length) {
+
+    if (progress) {
+        progress.style.width = "100%";
+    }
+
+    unlockAchievement(
+        "networkScout",
+        "Complete a network scan"
+    );
+
+    emyProfile.scans++;
+
+    emyProfile.tools++;
+
+    addXP(15);
+
+    saveProfile();
+
+    return;
+}
+
+        
+
+
+
+        status.innerHTML += lines[i] + "<br>";
+
+
+
+        if (progress) {
+
+
+            const percentage =
+            Math.round(
+                ((i + 1) / lines.length) * 100
+            );
+
+
+            progress.style.width =
+            percentage + "%";
+
+
+        }
+
+
+
+        i++;
+
+
+        setTimeout(next, 700);
+
+
+    }
+
+
+
+    next();
+
 
 }
 
-next();
+// =======================================
+// EXIT MATRIX MODE
+// =======================================
+
+function exitMatrix() {
+
+    const matrixMode = document.getElementById("matrixMode");
+
+    if (!matrixMode) return;
+
+    matrixMode.style.display = "none";
+
+    // Restore normal website scrolling
+    document.body.style.overflow = "";
 
 }
+
+// =======================================
+// MATRIX TERMINAL
+// =======================================
+
+function runMatrixCommand(event) {
+
+    if (event.key !== "Enter") return;
+
+    const input = event.target;
+    const command = input.value.trim().toLowerCase();
+
+    if (!command) return;
+
+    const screen = document.querySelector(".matrix-terminal-screen");
+
+    if (!screen) return;
+
+    const line = document.createElement("p");
+
+    line.textContent = "emy@matrix:~$ " + command;
+
+    screen.appendChild(line);
+
+    input.value = "";
+
+    const response = document.createElement("p");
+
+    switch (command) {
+
+        case "help":
+
+            response.textContent =
+                "AVAILABLE COMMANDS: help | status | system | whoami | scan | tools | clear | exit";
+
+            break;
+
+        case "status":
+
+            response.textContent =
+                "SYSTEM: ONLINE | FIREWALL: ACTIVE | ENCRYPTION: ACTIVE | NETWORK: SECURE";
+
+            break;
+
+        case "system":
+
+            response.textContent =
+                "EMY OS v2.0 | MATRIX CORE: ACTIVE | CREATOR ACCESS: GRANTED";
+
+            break;
+
+        case "whoami":
+
+            response.textContent =
+                "CREATOR: EMY";
+
+            break;
+
+        case "scan":
+
+            response.textContent =
+                "NETWORK SCAN INITIALIZED... SIMULATED SCAN COMPLETE.";
+
+            break;
+
+        case "tools":
+
+            response.textContent =
+                "MATRIX TOOLS: STATUS | SYSTEM | SCAN | WHOAMI";
+
+            break;
+
+        case "clear":
+
+            screen.innerHTML = "";
+
+            return;
+
+        case "exit":
+
+            exitMatrix();
+
+            return;
+
+        default:
+
+            response.textContent =
+                "COMMAND NOT FOUND. TYPE 'help' FOR AVAILABLE COMMANDS.";
+
+    }
+
+    screen.appendChild(response);
+
+    screen.scrollTop = screen.scrollHeight;
+
+}
+
+// =======================================
+// MATRIX CYBER LAB STATUS ANIMATION
+// =======================================
+
+function startCyberLabSystems() {
+
+    const bars = document.querySelectorAll(
+        "#cyberWindow .os-progress-bar"
+    );
+
+    if (!bars.length) return;
+
+    bars.forEach((bar, index) => {
+
+        bar.style.width = "0%";
+
+        setTimeout(() => {
+
+            let progress = 0;
+
+            const interval = setInterval(() => {
+
+                progress += Math.floor(Math.random() * 8) + 3;
+
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                }
+
+                bar.style.width = progress + "%";
+
+            }, 120);
+
+        }, index * 500);
+
+    });
+}
+
+// =======================================
+// CYBER LAB LIVE SECURITY MONITOR
+// =======================================
+
+function startCyberLabMonitor() {
+
+    const cyberWindow = document.getElementById("cyberWindow");
+
+    if (!cyberWindow) return;
+
+    const bars = cyberWindow.querySelectorAll(".security-fill");
+
+    if (bars.length < 3) return;
+
+    function updateSecurityBars() {
+
+        const integrity = 95 + Math.floor(Math.random() * 6);
+        const firewall = 92 + Math.floor(Math.random() * 7);
+        const network = 85 + Math.floor(Math.random() * 10);
+
+        bars[0].style.width = integrity + "%";
+        bars[1].style.width = firewall + "%";
+        bars[2].style.width = network + "%";
+    }
+
+    updateSecurityBars();
+
+    setInterval(updateSecurityBars, 3000);
+}
+
+window.addEventListener("load", () => {
+    startCyberLabMonitor();
+});
+
+// =======================================
+// CYBER LAB TOOL ACTIVITY
+// =======================================
+
+function cyberToolActivity(tool) {
+
+    const cyberWindow = document.getElementById("cyberWindow");
+
+    if (!cyberWindow) return;
+
+    const bars = cyberWindow.querySelectorAll(".security-fill");
+
+    if (bars.length < 3) return;
+
+    if (tool === "password") {
+
+        bars[0].style.width = "100%";
+        bars[1].style.width = "98%";
+
+    }
+
+    if (tool === "hash") {
+
+        bars[0].style.width = "99%";
+        bars[1].style.width = "100%";
+
+    }
+
+    if (tool === "network") {
+
+        bars[1].style.width = "100%";
+        bars[2].style.width = "100%";
+
+    }
+
+    if (tool === "secret") {
+
+        bars[0].style.width = "100%";
+        bars[1].style.width = "100%";
+        bars[2].style.width = "98%";
+
+    }
+
+}
+
+
+// Watch the existing Cyber Lab buttons
+document.addEventListener("click", (event) => {
+
+    const button = event.target.closest(
+        "#cyberWindow .creator-controls button"
+    );
+
+    if (!button) return;
+
+    const text = button.textContent.toLowerCase();
+
+    if (text.includes("password")) {
+
+        cyberToolActivity("password");
+
+    } else if (text.includes("hash")) {
+
+        cyberToolActivity("hash");
+
+    } else if (text.includes("network")) {
+
+        cyberToolActivity("network");
+
+    } else if (text.includes("secret")) {
+
+        cyberToolActivity("secret");
+
+} else if (text.includes("secret")) {
+
+    cyberToolActivity("secret");
+
+}
+});
+
+function loginEMYOS(){
+
+    const password =
+    document.getElementById("osPassword").value;
+
+    const message =
+    document.getElementById("loginMessage");
+
+    if(password === "Emy2026"){
+
+        message.style.color="#00ff66";
+
+        message.innerHTML =
+        "ACCESS GRANTED 👑";
+
+        setTimeout(()=>{
+
+            document.getElementById(
+                "emyLockScreen"
+            ).style.display="none";
+
+            startEMYBoot();
+
+        },1500);
+
+    }else{
+
+        message.style.color="red";
+
+        message.innerHTML =
+        "ACCESS DENIED ❌";
+
+    }
+
+}
+
+function startEMYBoot(){
+
+    const bootScreen =
+    document.getElementById("emyBootScreen");
+
+    const bootProgress =
+    document.getElementById("bootProgress");
+
+    const bootLog =
+    document.getElementById("bootLog");
+
+    const bootMessage =
+    document.getElementById("bootMessage");
+
+    if(
+        !bootScreen ||
+        !bootProgress ||
+        !bootLog ||
+        !bootMessage
+    ) return;
+
+    bootScreen.style.display = "flex";
+
+    bootProgress.style.width = "0%";
+
+    bootLog.innerHTML = "";
+
+    const steps = [
+
+        "Initializing system kernel...",
+
+        "✓ Matrix Core loaded",
+
+        "✓ Cyber Lab activated",
+
+        "✓ File Explorer connected",
+
+        "✓ Security systems online",
+
+        "✓ Secret files decrypted",
+
+        "WELCOME BACK, CREATOR 👑"
+
+    ];
+
+    let i = 0;
+
+    function nextStep(){
+
+        if(i >= steps.length){
+
+            bootProgress.style.width = "100%";
+
+            setTimeout(()=>{
+
+                bootMessage.innerHTML =
+                "EMY OS READY 🚀";
+
+                setTimeout(()=>{
+
+                    bootScreen.style.display =
+                    "none";
+
+                },1000);
+
+            },500);
+
+            return;
+        }
+
+        bootLog.innerHTML +=
+        "> " + steps[i] + "<br>";
+
+        const percentage =
+        Math.round(
+            ((i + 1) / steps.length) * 100
+        );
+
+        bootProgress.style.width =
+        percentage + "%";
+
+        i++;
+
+        setTimeout(nextStep, 700);
+
+    }
+
+    nextStep();
+
+}
+
+// =======================================
+// EMY OS ACHIEVEMENT SYSTEM
+// =======================================
+
+const achievements = {
+
+    matrixWalker: {
+        name: "MATRIX WALKER",
+        description: "Enter Matrix Mode"
+    },
+
+    networkScout: {
+        name: "NETWORK SCOUT",
+        description: "Complete a network scan"
+    },
+
+    cryptographer: {
+        name: "CRYPTOGRAPHER",
+        description: "Generate a SHA-256 hash"
+    },
+
+    fileExplorer: {
+        name: "FILE EXPLORER",
+        description: "Open a secret file"
+    },
+
+    cyberDefender: {
+        name: "CYBER DEFENDER",
+        description: "Use the Cyber Lab tools"
+    }
+
+};
+
+
+function unlockAchievement(id) {
+
+    const achievement = achievements[id];
+
+    if (!achievement) return;
+
+    const unlocked =
+    JSON.parse(
+        localStorage.getItem("emyAchievements")
+    ) || [];
+
+    if (unlocked.includes(id)) return;
+
+    unlocked.push(id);
+
+    localStorage.setItem(
+        "emyAchievements",
+        JSON.stringify(unlocked)
+    );
+
+    showAchievementNotification(achievement);
+
+    updateAchievements();
+
+}
+
+
+function showAchievementNotification(achievement) {
+
+    const notification =
+    document.createElement("div");
+
+    notification.className =
+    "achievement-notification";
+
+    notification.innerHTML = `
+
+        🏆 ACHIEVEMENT UNLOCKED
+
+        <br><br>
+
+        <strong>
+            ${achievement.name}
+        </strong>
+
+        <br>
+
+        <small>
+            ${achievement.description}
+        </small>
+
+    `;
+
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+
+        notification.classList.add("show");
+
+    }, 100);
+
+    setTimeout(() => {
+
+        notification.classList.remove("show");
+
+        setTimeout(() => {
+
+            notification.remove();
+
+        }, 500);
+
+    }, 4000);
+
+}
+
+
+function updateAchievements() {
+
+    const unlocked =
+    JSON.parse(
+        localStorage.getItem("emyAchievements")
+    ) || [];
+
+    const achievementElements =
+    document.querySelectorAll(".achievement");
+
+    const ids = [
+
+        "matrixWalker",
+        "networkScout",
+        "cryptographer",
+        "fileExplorer",
+        "cyberDefender"
+
+    ];
+
+    achievementElements.forEach(
+        (element, index) => {
+
+            const id = ids[index];
+
+            if (unlocked.includes(id)) {
+
+                element.classList.remove("locked");
+
+                element.classList.add("unlocked");
+
+                const icon =
+                element.querySelector("div");
+
+            }
+
+        }
+
+    );
+
+}
+
+
+window.addEventListener(
+    "load",
+    updateAchievements
+);
+
+// =======================================
+// EMY OS PROFILE SYSTEM
+// =======================================
+
+let emyProfile = JSON.parse(
+    localStorage.getItem("emyProfile")
+) || {
+
+    xp: 0,
+
+    achievements: 0,
+
+    hashes: 0,
+
+    scans: 0,
+
+    files: 0,
+
+    tools: 0
+
+};
+
+// SYNC SAVED ACHIEVEMENTS WITH PROFILE
+
+if (typeof unlockedAchievements !== "undefined") {
+
+    emyProfile.achievements =
+    unlockedAchievements.size;
+
+    saveProfile();
+
+}
+
+
+// Make sure older saved profiles also get this property
+
+if (typeof emyProfile.achievements === "undefined") {
+
+    emyProfile.achievements = 0;
+
+}
+
+
+// SAVE PROFILE
+
+function saveProfile() {
+
+    localStorage.setItem(
+        "emyProfile",
+        JSON.stringify(emyProfile)
+    );
+
+}
+
+
+// ADD XP
+
+function addXP(amount) {
+
+    emyProfile.xp += amount;
+
+    saveProfile();
+
+    updateProfile();
+
+}
+
+
+// UPDATE PROFILE WINDOW
+
+function updateProfile() {
+
+    const level =
+        Math.floor(emyProfile.xp / 100) + 1;
+
+    const currentXP =
+        emyProfile.xp % 100;
+
+
+    const profileLevel =
+        document.getElementById("profileLevel");
+
+    const xpBar =
+        document.getElementById("xpBar");
+
+    const xpText =
+        document.getElementById("xpText");
+
+
+    if (profileLevel) {
+
+        profileLevel.textContent =
+            "LEVEL " + level;
+
+    }
+
+
+    if (xpBar) {
+
+        xpBar.style.width =
+            currentXP + "%";
+
+    }
+
+
+    if (xpText) {
+
+        xpText.textContent =
+            currentXP + " / 100 XP";
+
+    }
+
+
+    const hashCount =
+        document.getElementById("hashCount");
+
+    const scanCount =
+        document.getElementById("scanCount");
+
+    const fileCount =
+        document.getElementById("fileCount");
+
+    const toolCount =
+        document.getElementById("toolCount");
+
+    const achievementCount =
+        document.getElementById("achievementCount");
+
+
+    if (hashCount) {
+
+        hashCount.textContent =
+            emyProfile.hashes;
+
+    }
+
+
+    if (scanCount) {
+
+        scanCount.textContent =
+            emyProfile.scans;
+
+    }
+
+
+    if (fileCount) {
+
+        fileCount.textContent =
+            emyProfile.files;
+
+    }
+
+
+    if (toolCount) {
+
+        toolCount.textContent =
+            emyProfile.tools;
+
+    }
+
+
+    // COUNT SAVED ACHIEVEMENTS
+
+    const savedAchievements =
+        JSON.parse(
+            localStorage.getItem("emyAchievements") || "[]"
+        );
+
+
+    if (achievementCount) {
+
+        achievementCount.textContent =
+            savedAchievements.length;
+
+    }
+
+
+    // KEEP PROFILE DATA IN SYNC
+
+    if (typeof emyProfile !== "undefined") {
+
+        emyProfile.achievements =
+            savedAchievements.length;
+
+    }
+
+}
+
+
+// LOAD PROFILE
+
+document.addEventListener(
+    "DOMContentLoaded",
+    updateProfile
+);

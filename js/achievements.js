@@ -5,166 +5,163 @@
 
 const unlockedAchievements = new Set(
 
-Storage.load(
-
-"achievements",
-
-[]
-
-)
+    Storage.load(
+        "achievements",
+        []
+    )
 
 );
 
-function unlockAchievement(title,description){
 
-const key = title;
+function unlockAchievement(id) {
 
-if(unlockedAchievements.has(key)) return;
+    const achievement = achievements[id];
 
-unlockedAchievements.add(key);
+    if (!achievement) return;
 
-Storage.save(
 
-"achievements",
+    const unlocked =
+        JSON.parse(
+            localStorage.getItem("achievements")
+        ) || [];
 
-[...unlockedAchievements]
 
-);
+    if (unlocked.includes(id)) {
 
-const popup = get("achievementPopup");
+        const count =
+            document.getElementById("achievementCount");
 
-const heading = get("achievementTitle");
+        if (count) {
+            count.textContent = unlocked.length;
+        }
 
-const text = get("achievementDescription");
+        return;
+    }
 
-if(!popup || !heading || !text) return;
 
-heading.innerHTML = title;
+    unlocked.push(id);
 
-text.innerHTML = description;
 
-popup.classList.add("show");
+    localStorage.setItem(
+        "achievements",
+        JSON.stringify(unlocked)
+    );
 
-setTimeout(()=>{
 
-popup.classList.remove("show");
+    // UPDATE PROFILE ACHIEVEMENT COUNT
 
-},3500);
+    if (typeof emyProfile !== "undefined") {
+
+        emyProfile.achievements =
+            unlocked.length;
+
+        saveProfile();
+
+    }
+
+
+    // UPDATE ACHIEVEMENT COUNT ON SCREEN
+
+    const count =
+        document.getElementById("achievementCount");
+
+    if (count) {
+
+        count.textContent =
+            unlocked.length;
+
+    }
+
+
+    // UPDATE PROFILE WINDOW
+
+    if (typeof updateProfile === "function") {
+
+        updateProfile();
+
+    }
+
+
+    // SHOW ACHIEVEMENT POPUP
+
+    if (typeof showAchievementNotification === "function") {
+
+        showAchievementNotification(
+            achievement
+        );
+
+    }
+
+
+    // REFRESH ACHIEVEMENT WINDOW
+
+    if (typeof updateAchievements === "function") {
+
+        updateAchievements();
+
+    }
 
 }
 
 function openWindow(id){
 
-const win=document.getElementById(id);
+    const win = document.getElementById(id);
 
-if(!win) return;
+    if(!win) return;
 
-win.style.display="block";
+    win.style.display = "block";
 
-win.style.zIndex=Date.now();
+    win.style.zIndex = Date.now();
 
-const running=document.getElementById("runningApps");
+    const running =
+    document.getElementById("runningApps");
 
-if(running){
+    if(running){
 
-const exists=document.getElementById("app-"+id);
+        const exists =
+        document.getElementById("app-" + id);
 
-if(!exists){
+        if(!exists){
 
-const app=document.createElement("div");
+            const app =
+            document.createElement("div");
 
-app.className="running-app";
+            app.className =
+            "running-app";
 
-app.id="app-"+id;
+            app.id =
+            "app-" + id;
 
-app.innerHTML=id
+            app.innerHTML =
+            id
+            .replace("Window","")
+            .replace(/([A-Z])/g," $1")
+            .trim();
 
-.replace("Window","")
+            app.onclick = ()=>{
 
-.replace(/([A-Z])/g," $1")
+                win.style.display = "block";
 
-.trim();
+                win.style.zIndex =
+                Date.now();
 
-app.onclick=()=>{
+            };
 
-win.style.display="block";
+            running.appendChild(app);
 
-win.style.zIndex=Date.now();
+        }
 
-};
-
-running.appendChild(app);
+    }
 
 }
 
-}
-
-}
 
 function closeWindow(id){
 
-const win=document.getElementById(id);
+    const win = document.getElementById(id);
 
-if(win){
+    if(!win) return;
 
-win.style.display="none";
-
-}
-
-const app=document.getElementById("app-"+id);
-
-if(app){
-
-app.remove();
+    win.style.display = "none";
 
 }
-
-}
-
-Storage.save(
-
-"achievements",
-
-[...unlockedAchievements]
-
-);
-
-unlockAchievement(
-
-"🏆 First Contact",
-
-"Welcome to Emy's World."
-
-);
-
-unlockAchievement(
-
-"🖥 System Operator",
-
-"Activated the Live Hacker Dashboard."
-
-);
-
-unlockAchievement(
-
-"🌍 Global Observer",
-
-"Opened the Live Attack Map."
-
-);
-
-unlockAchievement(
-
-"🤖 Curious Mind",
-
-"Started a conversation with EMY AI."
-
-);
-
-unlockAchievement(
-
-"👑 Elite Hacker",
-
-"Unlocked Developer Mode."
-
-);

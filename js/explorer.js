@@ -157,6 +157,28 @@ icon:"🔒",
 type:"file"
 }
 
+,
+{
+    name:"system_logs.enc",
+    icon:"🔐",
+    type:"file"
+},
+{
+    name:"creator_access.key",
+    icon:"🗝️",
+    type:"file"
+},
+{
+    name:"matrix_protocol.dat",
+    icon:"🟩",
+    type:"file"
+},
+{
+    name:"developer_notes.txt",
+    icon:"📜",
+    type:"file"
+}
+
 ]
 
 
@@ -249,6 +271,120 @@ CREATOR ONLY 👑
 
 Warning:
 Sensitive information detected.
+`,
+
+"system_logs.enc":`
+
+<h2>🔐 ENCRYPTED SYSTEM LOGS</h2>
+
+<br>
+
+STATUS: ENCRYPTED
+
+<br><br>
+
+[03:42:18] Secure session initialized...<br>
+[03:42:21] Firewall status: ACTIVE<br>
+[03:42:25] Unauthorized access attempts: 0<br>
+[03:42:31] Network integrity: VERIFIED<br>
+[03:42:39] Encryption protocol: AES-256<br>
+
+<br>
+
+🔒 LOG ACCESS RESTRICTED
+`,
+
+"creator_access.key":`
+
+<h2>🗝️ CREATOR ACCESS KEY</h2>
+
+<br>
+
+ACCESS LEVEL: CREATOR 👑
+
+<br><br>
+
+Identity verified.
+
+<br><br>
+
+Permissions granted:
+
+<br>
+
+✓ System Control<br>
+✓ Cyber Lab Access<br>
+✓ Matrix Protocol Access<br>
+✓ Secret File Access<br>
+
+<br>
+
+<span style="color:#00ff88;">
+ACCESS GRANTED
+</span>
+`,
+
+"matrix_protocol.dat":`
+
+<h2>🟩 MATRIX PROTOCOL</h2>
+
+<br>
+
+PROTOCOL STATUS: ACTIVE
+
+<br><br>
+
+Loading encrypted sequence...
+
+<br><br>
+
+01000101 01001101 01011001<br>
+01001111 01010011<br>
+01001100 01001001 01001110 01001011<br>
+
+<br><br>
+
+💚 MATRIX CORE CONNECTED
+
+<br>
+
+SYSTEM ACCESS GRANTED
+`,
+
+"developer_notes.txt":`
+
+<h2>📜 DEVELOPER NOTES</h2>
+
+<br>
+
+Project: EMY OS v2.0
+
+<br><br>
+
+Creator: Emy 👑
+
+<br><br>
+
+Current systems:
+
+<br>
+
+✓ Matrix Mode<br>
+✓ Cyber Lab<br>
+✓ Password Analyzer<br>
+✓ SHA-256 Hash Generator<br>
+✓ Network Scanner<br>
+✓ Secret Files<br>
+
+<br><br>
+
+Next objective:
+
+<br>
+
+<span style="color:#00ff88;">
+Build something even crazier. 🚀
+</span>
 `,
 
 "Password Analyzer":`
@@ -387,37 +523,52 @@ Interactive live scanner.
 
 };
 
-function openFile(fileName){
+function openFile(fileName){ 
 
 
-const viewer =
-document.getElementById("fileViewerContent");
+    const viewer = 
+    document.getElementById("fileViewerContent"); 
 
 
-if(!viewer) return;
-
-
-
-viewer.innerHTML =
-fileContents[fileName] ||
-`
-<h2>${fileName}</h2>
-
-<br>
-
-No preview available.
-
-`;
+    if(!viewer) return; 
 
 
 
-openWindow("fileViewerWindow");
+    viewer.innerHTML = 
+    fileContents[fileName] || 
+    ` 
+    <h2>${fileName}</h2> 
+
+    <br> 
+
+    No preview available. 
+
+    `;
+
+
+
+unlockAchievement(
+    "fileExplorer",
+    "Open a secret file"
+);
+
+
+    if(typeof emyProfile !== "undefined"){
+
+
+        emyProfile.files++;
+
+        emyProfile.tools++;
+
+        addXP(10);
+
+        saveProfile();
+
+
+    }
 
 
 }
-
-
-
 
 
 
@@ -548,3 +699,4 @@ loadExplorer();
 
 
 }
+
