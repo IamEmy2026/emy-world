@@ -21,6 +21,54 @@
 
 
    <body>
+    <div id="emyLockScreen">
+
+    <div class="lock-box">
+
+        <h1>
+            🔒 EMY OS v2.0
+        </h1>
+
+        <p>
+            Welcome back, Creator 👑
+        </p>
+
+        <input 
+        id="osPassword"
+        type="password"
+        placeholder="Enter password">
+
+        <button onclick="loginEMYOS()">
+            LOGIN
+        </button>
+
+        <p id="loginMessage"></p>
+
+    </div>
+
+</div>
+
+<div id="emyBootScreen">
+
+    <div class="boot-box">
+
+        <h1>🖥️ EMY OS v2.0</h1>
+
+        <p id="bootMessage">
+            Initializing EMY OS...
+        </p>
+
+        <div class="boot-progress-container">
+
+            <div id="bootProgress"></div>
+
+        </div>
+
+        <div id="bootLog"></div>
+
+    </div>
+
+</div>
 
 <div id="bootScreen">
 
@@ -47,7 +95,7 @@
     <div class="desktop-title">
         🖥️ EMY OS v2.0
     </div>
-</div>
+
 
     <div class="desktop-icons">
 
@@ -121,9 +169,23 @@ Cyber Lab
 
 </div>
 
-<div class="desktop-shortcut" id="explorerShortcut">
+<div class="desktop-shortcut" ondblclick="openWindow('achievementsWindow')">
 
-<div class="desktop-shortcut" ondblclick="openExplorer()">
+    <div class="shortcut-icon">
+        🏆
+    </div>
+
+    <div class="shortcut-label">
+        Achievements
+    </div>
+
+</div>
+
+<div
+    class="desktop-shortcut"
+    id="explorerShortcut"
+    ondblclick="openExplorer()"
+>
 
 <div class="shortcut-icon">
 📁
@@ -135,9 +197,38 @@ Explorer
 
 </div>
 
+<div class="desktop-shortcut" ondblclick="openWindow('wallpaperWindow')">
+
+    <div class="shortcut-icon">
+        🎨
+    </div>
+
+    <div class="shortcut-label">
+        Wallpapers
+    </div>
+    
+    <div class="desktop-shortcut"
+ondblclick="openWindow('profileWindow')">
+
+    <div class="shortcut-icon">
+        👤
+    </div>
+
+    <div class="shortcut-label">
+        My Profile
+    </div>
+
+</div>
+
+
+
+</div>
+
     <!-- =========================
      START MENU
 ========================= -->
+
+<div id="startMenu"></div>
 
 <div class="start-header">
 
@@ -183,10 +274,11 @@ Administrator
 
 </div>
 
-<div class="start-item" onclick="openWindow('cyberWindow')">
-
+<div class="start-item" onclick="openWindow('cyberWindow'); unlockAchievement('cyberDefender')">
 🛡 Cyber Lab
-
+<button onclick="openMatrix()">
+🟢 Matrix Mode
+</button>
 </div>
 
 <hr>
@@ -255,8 +347,8 @@ onclick="toggleStartMenu()"
 
 </div>
 
-
 </div>
+
 
 <div id="fileViewerWindow" class="os-window">
 
@@ -345,6 +437,132 @@ Network: CONNECTED
 Hello Creator 👋
 
 </div>
+
+</div>
+
+<!-- EMY OS PROFILE WINDOW -->
+
+<div id="profileWindow" class="os-window">
+
+    <div class="window-header drag-handle">
+        👤 EMY OS Profile
+        <button onclick="closeWindow('profileWindow')">X</button>
+    </div>
+
+    <div class="window-body">
+
+        <h2>👑 CREATOR PROFILE</h2>
+
+        <div class="profile-card">
+
+            <h3 id="profileName">
+                Emy 👑
+            </h3>
+
+            <p>
+                SYSTEM LEVEL:
+                <strong id="profileLevel">
+                    LEVEL 1
+                </strong>
+            </p>
+
+            <div class="xp-container">
+
+                <div id="xpBar"></div>
+
+            </div>
+
+            <p id="xpText">
+                0 / 100 XP
+            </p>
+
+            <hr>
+
+            <h3>📊 SYSTEM STATISTICS</h3>
+
+            <p>
+                🏆 Achievements:
+                <span id="achievementCount">0</span>/5
+            </p>
+
+            <p>
+                🔢 Hashes Generated:
+                <span id="hashCount">0</span>
+            </p>
+
+            <p>
+                🌐 Network Scans:
+                <span id="scanCount">0</span>
+            </p>
+
+            <p>
+                📁 Secret Files Opened:
+                <span id="fileCount">0</span>
+            </p>
+
+            <p>
+                🛡 Cyber Tools Used:
+                <span id="toolCount">0</span>
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ACHIEVEMENTS WINDOW -->
+
+<div id="achievementsWindow" class="os-window">
+
+    <div class="window-header drag-handle">
+        🏆 Achievements
+        <button onclick="closeWindow('achievementsWindow')">X</button>
+    </div>
+
+    <div class="window-body">
+
+        <h2>🏆 EMY OS ACHIEVEMENTS</h2>
+
+        <p>
+            Unlock achievements by exploring EMY OS.
+        </p>
+
+        <div id="achievementList">
+
+            <div class="achievement locked">
+                🔒 MATRIX WALKER
+                <br>
+                <small>Enter Matrix Mode</small>
+            </div>
+
+            <div class="achievement locked">
+                🔒 NETWORK SCOUT
+                <br>
+                <small>Complete a network scan</small>
+            </div>
+
+            <div class="achievement locked">
+                🔒 CRYPTOGRAPHER
+                <br>
+                <small>Generate a SHA-256 hash</small>
+            </div>
+
+            <div class="achievement locked">
+                🔒 FILE EXPLORER
+                <br>
+                <small>Open a secret file</small>
+            </div>
+
+            <div class="achievement locked">
+                🔒 CYBER DEFENDER
+                <br>
+                <small>Use the Cyber Lab tools</small>
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 
@@ -510,44 +728,44 @@ style="width:100%;background:#111;color:cyan;"></textarea>
 
 <div id="networkWindow" class="os-window">
 
-<div class="window-header drag-handle">
-🌐 Network Scanner
-<button onclick="closeWindow('networkWindow')">X</button>
+    <div class="window-header drag-handle">
+        🌐 Network Scanner
+        <button onclick="closeWindow('networkWindow')">X</button>
+    </div>
+
+    <div class="window-body">
+
+        <h2>🌐 EMY NETWORK SCANNER</h2>
+
+        <p class="online">
+            <span class="led"></span>
+            SCANNER READY
+        </p>
+
+        <br>
+
+        <div class="security-bar">
+            <div id="scanProgress"
+                 class="security-fill"
+                 style="width:0%;">
+            </div>
+        </div>
+
+        <br>
+
+        <button onclick="startNetworkScan()">
+            🚀 Start Scan
+        </button>
+
+        <br><br>
+
+        <div id="scanStatus">
+            Waiting for scan...
+        </div>
+
+    </div>
+
 </div>
-</div>
- 
-
-<div class="window-body">
-
-<h2>🌐 EMY NETWORK SCANNER</h2>
-
-<p class="online">
-<span class="led"></span>
-SCANNER READY
-</p>
-
-<br>
-
-<div class="security-bar">
-<div id="scanProgress" class="security-fill" style="width:0%;"></div>
-</div>
-
-<br>
-
-<button onclick="startNetworkScan()">
-🚀 Start Scan
-</button>
-
-<br><br>
-
-<div id="scanStatus">
-
-Waiting for scan...
-
-</div>
-
-</div>
-
 <nav>
 ...
 </nav>
@@ -1288,7 +1506,7 @@ Loading security systems...
 
 
 <input 
-id="passwordInput"
+id="matrixPasswordInput"
 type="password"
 placeholder="Enter password">
 
@@ -1914,6 +2132,106 @@ loading="lazy">
 
 </div>
 
+<!-- =========================
+     MATRIX MODE
+========================= -->
+
+<div id="matrixMode">
+
+    <div class="matrix-security-dashboard">
+
+    <div class="matrix-dashboard-title">
+        🛡 MATRIX SECURITY
+    </div>
+
+    <div class="matrix-status-row">
+        <span>SYSTEM</span>
+        <strong class="matrix-online">ONLINE</strong>
+    </div>
+
+    <div class="matrix-status-row">
+        <span>ENCRYPTION</span>
+        <strong class="matrix-online">ACTIVE</strong>
+    </div>
+
+    <div class="matrix-status-row">
+        <span>FIREWALL</span>
+        <strong class="matrix-online">ACTIVE</strong>
+    </div>
+
+    <div class="matrix-status-row">
+        <span>NETWORK</span>
+        <strong class="matrix-online">SECURE</strong>
+    </div>
+
+    <div class="matrix-status-row">
+        <span>CREATOR ACCESS</span>
+        <strong class="matrix-online">GRANTED</strong>
+    </div>
+
+</div>
+
+<canvas id="matrixCanvas"></canvas>
+
+<div class="matrix-terminal">
+
+<div class="matrix-terminal-header">
+
+<span>🟢 EMY MATRIX TERMINAL</span>
+
+<span>SECURE CONNECTION</span>
+
+</div>
+
+
+<div class="matrix-terminal-screen">
+
+<p>&gt; INITIALIZING EMY OS...</p>
+
+<p>&gt; CONNECTING TO SECURE NODE...</p>
+
+<p>&gt; ENCRYPTION ........ ACTIVE</p>
+
+<p>&gt; FIREWALL .......... ACTIVE</p>
+
+<p>&gt; NETWORK ........... SECURE</p>
+
+<p>&gt; CREATOR ACCESS .... GRANTED</p>
+
+<div class="matrix-command-line">
+
+    <span>emy@matrix:~$</span>
+
+    <input
+        type="text"
+        class="matrix-command-input"
+        onkeydown="runMatrixCommand(event)"
+        autocomplete="off"
+        spellcheck="false"
+        autofocus
+    >
+
+</div>
+<button class="exit-matrix-btn" onclick="exitMatrix()">
+    EXIT MATRIX
+</button>
+
+</div>
+
+</div>
+
+<div class="matrix-message">
+
+<h1>🟢 MATRIX MODE</h1>
+
+<p>
+SYSTEM ACCESS GRANTED
+</p>
+
+</div>
+
+</div>
+
 <!-- ================= SCRIPTS ================= -->
 <body>
 <script src="js/utils.js"></script>
@@ -1924,6 +2242,7 @@ loading="lazy">
 <script src="js/ai.js"></script>
 <script src="js/explorer.js"></script>
 <script src="js/script.js"></script>
+<script src="js/matrix.js"></script>
 
 </body>
 
