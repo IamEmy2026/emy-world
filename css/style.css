@@ -1208,7 +1208,7 @@ color:cyan;
    MATRIX MODE
 =========================== */
 
-.matrix-mode{
+body.matrix-mode{
 
     background:#000 !important;
 
@@ -1216,7 +1216,7 @@ color:cyan;
 
 }
 
-.matrix-mode .card{
+body.matrix-mode .card{
 
     border-color:#00ff66;
 
@@ -1224,13 +1224,13 @@ color:cyan;
 
 }
 
-.matrix-mode .navbar{
+body.matrix-mode .navbar{
 
     border-bottom:1px solid #00ff66;
 
 }
 
-.matrix-mode button{
+body.matrix-mode button{
 
     border-color:#00ff66;
 
@@ -1238,7 +1238,7 @@ color:cyan;
 
 }
 
-.matrix-mode button:hover{
+body.matrix-mode button:hover{
 
     background:#00ff66;
 
@@ -1246,7 +1246,7 @@ color:cyan;
 
 }
 
-.matrix-mode .terminal{
+body.matrix-mode .terminal{
 
     border-color:#00ff66;
 
@@ -1254,7 +1254,7 @@ color:cyan;
 
 }
 
-.matrix-mode .profile-pic{
+body.matrix-mode .profile-pic{
 
     border-color:#00ff66;
 
@@ -1262,9 +1262,9 @@ color:cyan;
 
 }
 
-.matrix-mode h1,
-.matrix-mode h2,
-.matrix-mode h3{
+body.matrix-mode h1,
+body.matrix-mode h2,
+body.matrix-mode h3{
 
     color:#00ff66;
 
@@ -2985,7 +2985,7 @@ color:white;
 
 .emy-desktop{
 
-display:none;
+display:block;
 animation:desktopFade 1s ease;
 
 position:relative;
@@ -2993,7 +2993,6 @@ position:relative;
 height:600px;
 
 background:
-
 radial-gradient(circle,#111,#000);
 
 
@@ -3558,5 +3557,541 @@ margin:15px 0;
 margin:8px 0;
 
 color:white;
+
+}
+
+/* =========================
+   MATRIX MODE
+========================= */
+
+
+#matrixMode{
+
+display:none;
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:black;
+
+z-index:9999;
+
+overflow:hidden;
+
+}
+
+
+#matrixCanvas{
+
+position:absolute;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+}
+
+
+.matrix-message{
+
+position:absolute;
+
+top:50%;
+left:50%;
+
+transform:translate(-50%,-50%);
+
+text-align:center;
+
+color:#00ff41;
+
+font-family:monospace;
+
+text-shadow:
+0 0 10px #00ff41;
+
+}
+
+
+.matrix-message h1{
+
+font-size:50px;
+
+}
+
+/* =========================
+   MATRIX TERMINAL
+========================= */
+
+.matrix-terminal{
+
+position:absolute;
+
+top:40px;
+left:40px;
+
+width:420px;
+
+background:rgba(0,0,0,.90);
+
+border:1px solid #00ff41;
+
+box-shadow:
+0 0 20px rgba(0,255,65,.35);
+
+font-family:monospace;
+
+color:#00ff41;
+
+z-index:3;
+
+}
+
+
+.matrix-terminal-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:10px 14px;
+
+border-bottom:1px solid #00ff41;
+
+font-size:12px;
+
+}
+
+
+.matrix-terminal-screen{
+
+padding:15px;
+
+min-height:220px;
+
+font-size:13px;
+
+line-height:1.6;
+
+}
+
+
+.matrix-terminal-screen p{
+
+margin:4px 0;
+
+}
+
+
+.matrix-prompt{
+
+margin-top:15px !important;
+
+text-shadow:
+0 0 8px #00ff41;
+
+}
+
+
+.matrix-prompt::after{
+
+content:"_";
+
+animation:
+matrixCursor 1s infinite;
+
+}
+
+
+@keyframes matrixCursor{
+
+0%{
+opacity:1;
+}
+
+50%{
+opacity:0;
+}
+
+100%{
+opacity:1;
+}
+
+}
+
+/* =======================================
+   EXIT MATRIX BUTTON
+======================================= */
+
+.exit-matrix-btn {
+
+    display: block;
+
+    margin-top: 18px;
+
+    padding: 9px 18px;
+
+    background: #000;
+
+    color: #00ff41;
+
+    border: 1px solid #00ff41;
+
+    border-radius: 4px;
+
+    font-family: monospace;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+.exit-matrix-btn:hover {
+
+    background: #00ff41;
+
+    color: #000;
+
+    box-shadow: 0 0 15px #00ff41;
+
+}
+
+/* =======================================
+   MATRIX COMMAND INPUT
+======================================= */
+
+.matrix-command-line {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin-top: 15px;
+
+    color: #00ff41;
+
+    font-family: monospace;
+
+}
+
+.matrix-command-input {
+
+    flex: 1;
+
+    min-width: 0;
+
+    background: transparent;
+
+    border: none;
+
+    outline: none;
+
+    color: #00ff41;
+
+    font-family: monospace;
+
+    font-size: 13px;
+
+    caret-color: #00ff41;
+
+}
+
+.matrix-command-input::selection {
+
+    background: #00ff41;
+
+    color: #000;
+
+}
+
+/* ==========================
+   EMY OS LOCK SCREEN
+========================== */
+
+#emyLockScreen {
+
+    position: fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:#000;
+
+    z-index:99999;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+.lock-box {
+
+    text-align:center;
+
+    border:2px solid #00ff66;
+
+    padding:40px;
+
+    width:350px;
+
+    background:#050505;
+
+    box-shadow:
+    0 0 25px #00ff66;
+
+}
+
+
+.lock-box h1 {
+
+    color:#00ff66;
+
+}
+
+
+.lock-box input {
+
+    width:80%;
+
+    padding:12px;
+
+    margin:15px;
+
+    background:black;
+
+    border:1px solid #00ff66;
+
+    color:#00ff66;
+
+}
+
+
+.lock-box button {
+
+    padding:12px 30px;
+
+    background:black;
+
+    color:#00ff66;
+
+    border:1px solid #00ff66;
+
+    cursor:pointer;
+
+}
+
+
+.lock-box button:hover {
+
+    background:#00ff66;
+
+    color:black;
+
+}
+
+
+#loginMessage {
+
+    color:red;
+
+}
+
+/* ==========================
+   EMY OS BOOT SCREEN
+========================== */
+
+#emyBootScreen {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: #000;
+
+    z-index: 99998;
+
+    display: none;
+
+    justify-content: center;
+
+    align-items: center;
+
+    color: #00ff66;
+
+}
+
+.boot-box {
+
+    width: 500px;
+
+    max-width: 85%;
+
+    font-family: monospace;
+
+}
+
+.boot-box h1 {
+
+    text-align: center;
+
+    color: #00ff66;
+
+}
+
+#bootMessage {
+
+    margin-top: 30px;
+
+}
+
+.boot-progress-container {
+
+    width: 100%;
+
+    height: 18px;
+
+    border: 1px solid #00ff66;
+
+    margin: 20px 0;
+
+}
+
+#bootProgress {
+
+    width: 0%;
+
+    height: 100%;
+
+    background: #00ff66;
+
+    transition: width 0.4s ease;
+
+}
+
+#bootLog {
+
+    min-height: 160px;
+
+    line-height: 1.8;
+
+    color: #00ff66;
+
+}
+
+/* =========================
+   EMY OS ACHIEVEMENTS
+========================= */
+
+.achievement {
+
+    border: 1px solid #444;
+
+    padding: 15px;
+
+    margin: 12px 0;
+
+    font-family: monospace;
+
+    transition: 0.3s;
+
+}
+
+
+.achievement.locked {
+
+    opacity: 0.45;
+
+}
+
+
+.achievement.unlocked {
+
+    border-color: #00ff66;
+
+    box-shadow: 0 0 12px #00ff66;
+
+    opacity: 1;
+
+}
+
+
+.achievement.unlocked:hover {
+
+    transform: scale(1.02);
+
+}
+
+/* =========================
+   ACHIEVEMENT NOTIFICATION
+========================= */
+
+.achievement-notification {
+
+    position: fixed;
+
+    top: 30px;
+
+    right: -400px;
+
+    width: 280px;
+
+    padding: 20px;
+
+    background: #050505;
+
+    border: 2px solid #00ff66;
+
+    color: #00ff66;
+
+    font-family: monospace;
+
+    text-align: center;
+
+    box-shadow: 0 0 20px #00ff66;
+
+    z-index: 999999;
+
+    transition: right 0.5s ease;
+
+}
+
+
+.achievement-notification.show {
+
+    right: 30px;
+
+}
+
+
+.achievement-notification strong {
+
+    font-size: 18px;
+
+    color: #fff;
 
 }
