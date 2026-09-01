@@ -1208,7 +1208,7 @@ color:cyan;
    MATRIX MODE
 =========================== */
 
-.matrix-mode{
+body.matrix-mode{
 
     background:#000 !important;
 
@@ -1216,7 +1216,7 @@ color:cyan;
 
 }
 
-.matrix-mode .card{
+body.matrix-mode .card{
 
     border-color:#00ff66;
 
@@ -1224,13 +1224,13 @@ color:cyan;
 
 }
 
-.matrix-mode .navbar{
+body.matrix-mode .navbar{
 
     border-bottom:1px solid #00ff66;
 
 }
 
-.matrix-mode button{
+body.matrix-mode button{
 
     border-color:#00ff66;
 
@@ -1238,7 +1238,7 @@ color:cyan;
 
 }
 
-.matrix-mode button:hover{
+body.matrix-mode button:hover{
 
     background:#00ff66;
 
@@ -1246,7 +1246,7 @@ color:cyan;
 
 }
 
-.matrix-mode .terminal{
+body.matrix-mode .terminal{
 
     border-color:#00ff66;
 
@@ -1254,7 +1254,7 @@ color:cyan;
 
 }
 
-.matrix-mode .profile-pic{
+body.matrix-mode .profile-pic{
 
     border-color:#00ff66;
 
@@ -1262,9 +1262,9 @@ color:cyan;
 
 }
 
-.matrix-mode h1,
-.matrix-mode h2,
-.matrix-mode h3{
+body.matrix-mode h1,
+body.matrix-mode h2,
+body.matrix-mode h3{
 
     color:#00ff66;
 
