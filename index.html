@@ -30,197 +30,68 @@
         </h1>
 
         <p>
-            Welcome back, Creator 👑
+            Choose your access level
         </p>
 
-        <input 
-        id="osPassword"
-        type="password"
-        placeholder="Enter password">
 
-        <button onclick="loginEMYOS()">
-            LOGIN
-        </button>
+        <div class="login-options">
+
+
+            <!-- CREATOR LOGIN -->
+
+            <div class="login-card">
+
+                <h2>
+                    👑 Creator Access
+                </h2>
+
+                <p>
+                    Full system access
+                </p>
+
+                <input
+                    type="password"
+                    id="creatorPassword"
+                    placeholder="Enter Creator Password"
+                >
+
+                <button onclick="loginCreator()">
+                    LOGIN AS CREATOR
+                </button>
+
+            </div>
+
+
+            <!-- VISITOR LOGIN -->
+
+            <div class="login-card">
+
+                <h2>
+                    👤 Visitor Access
+                </h2>
+
+                <p>
+                    Explore EMY OS
+                </p>
+
+                <input
+                    type="password"
+                    id="visitorPassword"
+                    placeholder="Enter Visitor Password"
+                >
+
+                <button onclick="loginVisitor()">
+                    LOGIN AS VISITOR
+                </button>
+
+            </div>
+
+
+        </div>
 
         <p id="loginMessage"></p>
 
     </div>
-
-</div>
-
-<div id="emyBootScreen">
-
-    <div class="boot-box">
-
-        <h1>🖥️ EMY OS v2.0</h1>
-
-        <p id="bootMessage">
-            Initializing EMY OS...
-        </p>
-
-        <div class="boot-progress-container">
-
-            <div id="bootProgress"></div>
-
-        </div>
-
-        <div id="bootLog"></div>
-
-    </div>
-
-</div>
-
-<div id="bootScreen">
-
-    <div class="boot-logo">
-        EMY OS v2.0
-    </div>
-
-    <div id="bootProgressContainer">
-
-        <div id="bootProgressBar"></div>
-
-    </div>
-
-    <div id="bootOutput"></div>
-
-</div>
-
-<!-- =========================
-     EMY OS DESKTOP
-========================= -->
-
-<div id="emyDesktop" class="emy-desktop">
-
-    <div class="desktop-title">
-        🖥️ EMY OS v2.0
-    </div>
-
-
-    <div class="desktop-icons">
-
-<div class="desktop-shortcut" ondblclick="openWindow('terminalWindow')">
-
-<div class="shortcut-icon">
-
-💻
-
-</div>
-
-<div class="shortcut-label">
-
-Terminal
-
-</div>
-
-</div>
-
-
-
-<div class="desktop-shortcut" ondblclick="openWindow('dashboardWindow')">
-
-<div class="shortcut-icon">
-
-📊
-
-</div>
-
-<div class="shortcut-label">
-
-Dashboard
-
-</div>
-
-</div>
-
-
-
-<div class="desktop-shortcut" ondblclick="openWindow('aiWindow')">
-
-<div class="shortcut-icon">
-
-🤖
-
-</div>
-
-<div class="shortcut-label">
-
-EMY AI
-
-</div>
-
-</div>
-
-
-
-<div class="desktop-shortcut" ondblclick="openWindow('cyberWindow')">
-
-<div class="shortcut-icon">
-
-🛡
-
-</div>
-
-<div class="shortcut-label">
-
-Cyber Lab
-
-</div>
-
-</div>
-
-<div class="desktop-shortcut" ondblclick="openWindow('achievementsWindow')">
-
-    <div class="shortcut-icon">
-        🏆
-    </div>
-
-    <div class="shortcut-label">
-        Achievements
-    </div>
-
-</div>
-
-<div
-    class="desktop-shortcut"
-    id="explorerShortcut"
-    ondblclick="openExplorer()"
->
-
-<div class="shortcut-icon">
-📁
-</div>
-
-<div class="shortcut-label">
-Explorer
-</div>
-
-</div>
-
-<div class="desktop-shortcut" ondblclick="openWindow('wallpaperWindow')">
-
-    <div class="shortcut-icon">
-        🎨
-    </div>
-
-    <div class="shortcut-label">
-        Wallpapers
-    </div>
-    
-    <div class="desktop-shortcut"
-ondblclick="openWindow('profileWindow')">
-
-    <div class="shortcut-icon">
-        👤
-    </div>
-
-    <div class="shortcut-label">
-        My Profile
-    </div>
-
-</div>
-
-
 
 </div>
 
@@ -315,7 +186,7 @@ Administrator
 
 </div>
 
-</div>
+
 
     <div id="taskbar">
 
@@ -347,7 +218,7 @@ onclick="toggleStartMenu()"
 
 </div>
 
-</div>
+
 
 
 <div id="fileViewerWindow" class="os-window">
@@ -916,151 +787,162 @@ placeholder="Type a command..."
 
 <section class="creator-panel" id="creatorPanel">
 
-
     <h2>
         👑 EMY COMMAND CENTER
     </h2>
 
-
     <div class="command-grid">
 
-</div>
         <!-- SYSTEM CARD -->
 
         <div class="command-card">
 
-          <h3>
-    🖥 SYSTEM
-</h3>
+            <h3>
+                🖥 SYSTEM
+            </h3>
 
-<p>
-    Website:
-    <span class="online">
-<span class="led"></span>
-ONLINE
-</span>
-</p>
+            <p>
+                Website:
+                <span class="online">
+                    <span class="led"></span>
+                    ONLINE
+                </span>
+            </p>
 
-<p>
-    Terminal:
-    <span class="online">
-        ACTIVE
-    </span>
-</p>
+            <p>
+                Terminal:
+                <span class="online">
+                    ACTIVE
+                </span>
+            </p>
 
-<p>
-    Security:
-    <span class="root">
-        ROOT
-    </span>
-</p>
+            <p>
+                Security:
+                <span class="root">
+                    ROOT
+                </span>
+            </p>
 
-<hr>
+            <hr>
 
-<p>
-    🌐 Visitors:
-    <span id="visitorCount">
-        1
-    </span>
-</p>
+            <p>
+                🌐 Visitors:
+                <span id="visitorCount">
+                    1
+                </span>
+            </p>
 
-<p>
-    ⏱ Session:
-    <span id="sessionTimer">
-        00:00:00
-    </span>
-</p>
+            <p>
+                ⏱ Session:
+                <span id="sessionTimer">
+                    00:00:00
+                </span>
+            </p>
 
-<p>
-    ⚡ CPU:
-    <span id="cpuStatus">
-        Stable
-    </span>
-</p>
+            <p>
+                ⚡ CPU:
+                <span id="cpuStatus">
+                    Stable
+                </span>
+            </p>
 
-<p>
-    📡 Network:
-    <span id="networkStatus">
-        Connected
-    </span>
-</p>
+            <p>
+                📡 Network:
+                <span id="networkStatus">
+                    Connected
+                </span>
+            </p>
 
-<hr>
+            <hr>
 
-<p>
-    🕒 Time:
-    <span id="liveClock">
-        --:--:--
-    </span>
-</p>
+            <p>
+                🕒 Time:
+                <span id="liveClock">
+                    --:--:--
+                </span>
+            </p>
 
-<p>
-    🎨 Theme:
-    <span id="themeStatus">
-        Dark
-    </span>
-</p>
+            <p>
+                🎨 Theme:
+                <span id="themeStatus">
+                    Dark
+                </span>
+            </p>
 
-<p>
-    💻 Version:
-    <span class="root">
-        EmyOS v2.1
-    </span>
-</p>
-
+            <p>
+                💻 Version:
+                <span class="root">
+                    EmyOS v2.1
+                </span>
+            </p>
 
         </div>
 
+
+        <!-- VISITOR INTELLIGENCE CARD -->
+
         <div class="command-card">
 
-    <h3>📊 VISITOR INTELLIGENCE</h3>
+            <h3>
+                📊 VISITOR INTELLIGENCE
+            </h3>
 
-    <p>
-        👥 Total Visits:
-        <span id="visitCount">0</span>
-    </p>
+            <p>
+                👥 Total Visits:
+                <span id="visitCount">
+                    0
+                </span>
+            </p>
 
-    <p>
-        🎮 Games Played:
-        <span id="gamesPlayed">0</span>
-    </p>
+            <p>
+                🎮 Games Played:
+                <span id="gamesPlayed">
+                    0
+                </span>
+            </p>
 
-    <p>
-        💻 Commands Used:
-        <span id="commandCount">0</span>
-    </p>
+            <p>
+                💻 Commands Used:
+                <span id="commandCount">
+                    0
+                </span>
+            </p>
 
-    <p>
-        👑 Creator Logins:
-        <span id="creatorCount">0</span>
-    </p>
+            <p>
+                👑 Creator Logins:
+                <span id="creatorCount">
+                    0
+                </span>
+            </p>
 
-</div>
-
-<div class="command-card">
-
-    <h3>
-        📜 LIVE ACTIVITY
-    </h3>
-
-
-  <div id="activityFeed">
-
-    <div class="activity-item system">
-
-        <span class="activity-type">
-            SYSTEM
-        </span>
-
-        <p>
-            System Started...
-        </p>
-
-    </div>
-
-</div>
+        </div>
 
 
+        <!-- LIVE ACTIVITY CARD -->
+
+        <div class="command-card">
+
+            <h3>
+                📜 LIVE ACTIVITY
+            </h3>
+
+            <div id="activityFeed">
+
+                <div class="activity-item system">
+
+                    <span class="activity-type">
+                        SYSTEM
+                    </span>
+
+                    <p>
+                        System Started...
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
 
 
         <!-- GAMES CARD -->
@@ -1071,14 +953,12 @@ ONLINE
                 🎮 GAMES
             </h3>
 
-
             <p>
                 Guess Game:
                 <span class="online">
                     ACTIVE
                 </span>
             </p>
-
 
             <p>
                 RPS:
@@ -1087,7 +967,6 @@ ONLINE
                 </span>
             </p>
 
-
             <p>
                 Game Master:
                 <span class="root">
@@ -1095,10 +974,11 @@ ONLINE
                 </span>
             </p>
 
-
         </div>
 
+    </div>
 
+</section>
 
 
 
@@ -1139,7 +1019,6 @@ ONLINE
 
 
 
-    </div>
 
 
 
@@ -1223,7 +1102,6 @@ ONLINE
 
 
 
-</section>
 
 <!-- ================= ABOUT ================= -->
 
@@ -1917,9 +1795,11 @@ Send
 
 </section>
 
-<!-- MUSIC SECTION -->
+<!-- =========================
+     EMY MUSIC HUB
+========================= -->
 
-<section class="card music-section">
+ class="music-section" id="music"
 
     <h2>🎧 Emy's Coding Soundtrack</h2>
 
@@ -1945,57 +1825,64 @@ Send
     </div>
 
 
-  <h3>
-    🎵 My Coding Playlist
-</h3>
+ 
 
-<!-- MUSIC VISUALIZER -->
+<!-- =========================
+     EMY MUSIC HUB
+========================= -->
 
-<div class="now-playing">
+<section class="music-section" id="music">
 
-    <div class="vinyl">
+    <h2>🎵 EMY MUSIC</h2>
 
-        🎧
+    <p>
+        Search for any song or artist on Spotify.
+    </p>
 
-    </div>
+    <div class="music-search">
 
+        <input
+            type="text"
+            id="spotifySearchInput"
+            placeholder="🔍 Search for a song or artist..."
+        >
 
-    <div class="track-info">
-
-        <h3>
-            🔴 NOW PLAYING
-        </h3>
-
-        <p>
-            Emy's Coding Soundtrack
-        </p>
-
-    </div>
-
-
-    <div class="equalizer">
-
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+        <button onclick="searchSpotify()">
+            Search Spotify
+        </button>
 
     </div>
 
-</div>
+    <p>
+        Or explore by mood:
+    </p>
 
+    <div class="music-controls">
 
-<iframe 
-src="https://open.spotify.com/embed/playlist/7bYX07uYdjdIxJtIwh0NZa?utm_source=generator"
-width="100%"
-height="352"
-frameborder="0"
-allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-loading="lazy">
-</iframe>
+        <button onclick="searchSpotify('chill')">
+            🌙 Chill
+        </button>
+
+        <button onclick="searchSpotify('coding music')">
+            💻 Coding
+        </button>
+
+        <button onclick="searchSpotify('gaming music')">
+            🎮 Gaming
+        </button>
+
+        <button onclick="searchSpotify('Nigerian hits')">
+            🇳🇬 Nigerian Hits
+        </button>
+
+        <button onclick="searchSpotify('focus music')">
+            🧠 Focus
+        </button>
+
+    </div>
 
 </section>
+
 
 <!-- ================= ALBUMS ================= -->
 
@@ -2231,9 +2118,8 @@ SYSTEM ACCESS GRANTED
 </div>
 
 </div>
-
 <!-- ================= SCRIPTS ================= -->
-<body>
+
 <script src="js/utils.js"></script>
 <script src="js/achievements.js"></script>
 <script src="js/developer.js"></script>
@@ -2243,8 +2129,9 @@ SYSTEM ACCESS GRANTED
 <script src="js/explorer.js"></script>
 <script src="js/script.js"></script>
 <script src="js/matrix.js"></script>
+<script src="js/music.js"></script>
 
-</body>
+<script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
 
 </html>
 
